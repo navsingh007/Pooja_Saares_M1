@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_40">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/app_bar_main">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rlDefaultAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_15"
+                        android:background="@color/colorWhite"
+                        android:paddingLeft="@dimen/dp_5">
+
+                        <ImageView
+                            android:id="@+id/ivAddress"
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="@dimen/dp_1"
+                            android:src="@drawable/home_address_icon" />
+
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/ivAddress"
+                            android:paddingLeft="@dimen/dp_15"
+                            android:textColor="@color/black1" />
+
+                    </RelativeLayout>
+
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/clSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/llSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:background="@color/loginColor"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/dp_15"
+                                android:paddingTop="@dimen/dp_15"
+                                android:paddingRight="@dimen/dp_15"
+                                android:paddingBottom="@dimen/dp_10">
+
+                                <EditText
+                                    android:id="@+id/etSearch"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_45"
+                                    android:layout_marginRight="@dimen/dp_5"
+                                    android:layout_weight="8.5"
+                                    android:background="@drawable/home_search_background_edittext"
+                                    android:focusable="false"
+                                    android:hint="@string/home_search_hint"
+                                    android:inputType="none"
+                                    android:paddingLeft="@dimen/dp_20" />
+
+                                <RelativeLayout
+                                    android:id="@+id/rlSearchClick"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="50dp">
+
+                                    <ImageView
+                                        android:id="@+id/ivSearchBackground"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:src="@drawable/home_search_background" />
+
+                                    <ImageView
+                                        android:id="@+id/ivSearch"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:paddingBottom="@dimen/dp_5"
+                                        android:src="@drawable/home_search" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlViewPager"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:elevation="@dimen/dp_5"
+                            android:paddingTop="@dimen/dp_55"
+                            android:visibility="visible"
+                            app:layout_anchor="@id/llSearch"
+                            app:layout_anchorGravity="bottom|center">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:elevation="7dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvBannerSalesHeading1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/home_collection_title1"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvBannerSalesHeading2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/home_collection_title2"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <androidx.viewpager.widget.ViewPager
+                                    android:id="@+id/vpBanner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="250dp"
+                                    android:layout_marginLeft="@dimen/dp_15"
+                                    android:layout_marginRight="@dimen/dp_15"
+                                    android:layout_marginBottom="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_20"
+                                    android:background="@drawable/home_viewpager_background"
+                                    android:elevation="@dimen/dp_5"
+                                    android:visibility="visible" />
+                            </RelativeLayout>
+
+                            <com.google.android.material.tabs.TabLayout
+                                android:id="@+id/tabs"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="240dp"
+                                android:background="@drawable/home_banner_tabs_background"
+                                android:elevation="@dimen/dp_5"
+                                android:paddingBottom="@dimen/dp_8"
+                                android:visibility="visible"
+                                app:tabBackground="@drawable/viewpager_tab_selector"
+                                app:tabGravity="center"
+                                app:tabIndicatorHeight="0dp"
+                                app:tabPadding="@dimen/dp_1"
+                                app:tabPaddingEnd="@dimen/dp_5"
+                                app:tabPaddingStart="@dimen/dp_5" />
+
+                        </RelativeLayout>
+
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMotivationalMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:visibility="visible" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:layout_marginTop="-3dp"
+                        android:layout_marginBottom="@dimen/dp_1"
+                        android:background="@color/colorWhite"
+                        app:cardCornerRadius="@dimen/dp_10"
+                        app:cardUseCompatPadding="true"
+                        app:cardElevation="@dimen/dp_5">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_15"
+                                android:layout_marginBottom="@dimen/dp_15">
+
+                                <TextView
+                                    android:id="@+id/tvCategoriesHeading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/dp_15"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:text="@string/home_categories"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="@dimen/sp_18"
+                                    android:textStyle="bold" />
+
+                                <Button
+                                    android:id="@+id/btnAllCategories"
+                                    android:layout_width="@dimen/dp_80"
+                                    android:layout_height="@dimen/dp_30"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="@dimen/dp_15"
+                                    android:background="@drawable/btn_gradient_img2"
+                                    android:text="@string/home_view_all"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textStyle="bold"
+                                    android:visibility="visible" />
+
+                            </RelativeLayout>
+
+                            <com.seasia.poojasarees.views.home.gridview.WrapGridview
+                                android:id="@+id/gvCategories"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorWhite"
+                                android:fadeScrollbars="false"
+                                android:horizontalSpacing="0dp"
+                                android:numColumns="2"
+                                android:paddingLeft="@dimen/dp_10"
+                                android:paddingRight="@dimen/dp_10"
+                                android:paddingBottom="@dimen/dp_10"
+                                android:scrollbars="none" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvBrandsHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/home_brands"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvBrands"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_10"
+                        android:background="@color/colorWhite"
+                        app:cardCornerRadius="@dimen/dp_10"
+                        android:elevation="@dimen/dp_10"
+                        app:cardElevation="@dimen/dp_5">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvBrands"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_marginBottom="@dimen/dp_10"
+                                android:paddingLeft="@dimen/dp_10"
+                                android:paddingRight="@dimen/dp_10" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvNewArrivalsHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/home_new_arrivals"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvNewArrivals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_10"
+                        android:background="@color/colorWhite"
+                        app:cardCornerRadius="@dimen/dp_10"
+                        android:elevation="@dimen/dp_10"
+                        app:cardElevation="@dimen/dp_5">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvNewArrivals"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/dp_10"
+                                android:paddingRight="@dimen/dp_10" />
+
+                            <!--     <com.seasia.poojasarees.views.home.gridview.WrapGridview
+                                     android:id="@+id/gvNewArrivals"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:background="@color/colorWhite"
+                                     android:fadeScrollbars="false"
+                                     android:horizontalSpacing="0dp"
+                                     android:numColumns="2"
+                                     android:padding="@dimen/dp_10"
+                                     android:scrollbars="none" />-->
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

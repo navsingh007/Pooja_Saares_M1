@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="address"
+            type="com.seasia.poojasarees.model.helper.Address" />
+
+        <variable
+            name="addressVM"
+            type="com.seasia.poojasarees.viewmodel.address.AddressVM" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150">
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAddAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_25"
+                android:background="@color/colorWhite"
+                app:cardCornerRadius="@dimen/dp_10"
+                app:cardElevation="@dimen/dp_10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_15">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etShopHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etShop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्0123456789"
+                            android:hint="@string/address_shop_name"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={address.shopName}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etStreetHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etStreet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्01234567890,#-()"
+                            android:hint="@string/address_street"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={address.street}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etTownHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                            android:hint="@string/address_town"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={address.town}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etDistrictHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDistrict"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                            android:hint="@string/address_district"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={address.district}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etPincodeHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789"
+                            android:hint="@string/address_pincode"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:text="@={address.pincode}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.tiper.MaterialSpinner
+                        android:id="@+id/spnState"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:hint="@string/address_state"
+                        android:theme="@style/floating_et" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp_50">
+
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_margin="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:background="@drawable/profile_btn_transparent"
+                    android:onClick="@{(v) -> addressVM.onUpdateClick(v, address)}"
+                    android:text="@string/profile_update"
+                    android:textAllCaps="false"
+                    android:textColor="@color/psBtnText" />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:background="@drawable/profile_btn_transparent"
+                    android:text="@string/profile_cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/psBtnText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

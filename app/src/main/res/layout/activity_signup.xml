@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="signupVM"
+            type="com.seasia.poojasarees.viewmodel.auth.SignupVM" />
+
+        <variable
+            name="signup"
+            type="com.seasia.poojasarees.model.helper.Signup" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-15dp"
+        android:layout_marginBottom="-15dp"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/signup_whole"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <!--        <ImageView
+                    android:id="@+id/ivBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/login_background" />
+
+                <ImageView
+                    android:id="@+id/ivGradient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.9"
+                    android:background="@drawable/common_gradient" />
+
+                <ImageView
+                    android:id="@+id/ivBottomLayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/login_bottom" />
+
+                <ImageView
+                    android:id="@+id/ivBottom1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/splash_bottom" />
+
+                <ImageView
+                    android:id="@+id/ivBottom2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/splash_bottom2" />-->
+
+        <include
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/common_toolbar_transparent"
+            android:layout_marginTop="-23dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rlToolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_150" />
+
+                <!--android:layout_marginTop="@dimen/dp_150"-->
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:id="@+id/clRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="@dimen/dp_20">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvAuthenticate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_marginBottom="@dimen/dp_25"
+                        android:background="@color/colorWhite"
+                        app:cardCornerRadius="@dimen/dp_10"
+                        app:cardElevation="@dimen/dp_10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dp_15">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/etNameHeading"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dp_15"
+                                    android:layout_marginRight="@dimen/dp_15"
+                                    android:layout_weight="1"
+                                    android:theme="@style/floating_et"
+                                    app:hintEnabled="true">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/et_underline_thickness"
+                                        android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                                        android:hint="@string/register_first_name"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:maxLength="25"
+                                        android:text="@={signup.name}"
+                                        android:textColor="@color/hintColor2"
+                                        android:theme="@style/floating_et" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/etLastNameHeading"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dp_5"
+                                    android:layout_marginRight="@dimen/dp_15"
+                                    android:layout_weight="1"
+                                    android:theme="@style/floating_et"
+                                    app:hintEnabled="true">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/eLastName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/et_underline_thickness"
+                                        android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                                        android:hint="@string/register_last_name"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text"
+                                        android:maxLength="25"
+                                        android:text="@={signup.lastName}"
+                                        android:textColor="@color/hintColor2"
+                                        android:theme="@style/floating_et" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/etShopHeading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:theme="@style/floating_et"
+                                app:hintEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etShop"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/et_underline_thickness"
+                                    android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्0123456789"
+                                    android:hint="@string/register_shop_name"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:maxLength="32"
+                                    android:text="@={signup.shopName}"
+                                    android:textColor="@color/hintColor2"
+                                    android:theme="@style/floating_et" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.tiper.MaterialSpinner
+                                android:id="@+id/spnTown"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:hint="@string/register_town"
+                                android:paddingLeft="-5dp"
+                                android:theme="@style/ThemeSpinner"
+                                android:background="@drawable/et_spinner_thickness"/>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/etTownHeading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:theme="@style/floating_et"
+                                android:visibility="gone"
+                                app:hintEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etTown"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                                    android:hint="@string/register_town"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:maxLength="32"
+                                    android:text="@={signup.town}"
+                                    android:textColor="@color/hintColor2"
+                                    android:theme="@style/floating_et" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/etMobileNoHeading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:theme="@style/floating_et"
+                                app:hintEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etMobileNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/et_underline_thickness"
+                                    android:digits="12345677890"
+                                    android:hint="@string/register_mobile_no"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="phone"
+                                    android:maxLength="10"
+                                    android:text="@={signup.mobileNo}"
+                                    android:textColor="@color/hintColor2"
+                                    android:theme="@style/floating_et" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/etPasswordHeading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:theme="@style/floating_et"
+                                app:hintEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etPassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/et_underline_thickness"
+                                    android:hint="@string/register_set_password"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPassword"
+                                    android:maxLength="25"
+                                    android:text="@={signup.password}"
+                                    android:textColor="@color/hintColor2"
+                                    android:theme="@style/floating_et" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <TextView
+                                android:id="@+id/tvForgotPassword"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_marginTop="@dimen/dp_5"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:layout_marginBottom="@dimen/dp_40"
+                                android:text="@string/register_password_hint"
+                                android:textColor="@color/hintColor2" />
+
+                            <TextView
+                                android:id="@+id/tvViewInHindi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="@dimen/dp_50"
+                                android:text="@string/login_hindi"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:elevation="@dimen/dp_25"
+                        app:layout_anchor="@id/cvAuthenticate"
+                        app:layout_anchorGravity="bottom|center">
+
+                        <Button
+                            android:id="@+id/btn_continue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_gradient_img2"
+                            android:elevation="@dimen/dp_20"
+                            android:onClick="@{(v) -> signupVM.onSubmitClick(v, signup)}"
+                            android:text="@string/register_submit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+
+                    </RelativeLayout>
+
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_150"
+                    android:orientation="vertical"
+                    android:visibility="visible" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

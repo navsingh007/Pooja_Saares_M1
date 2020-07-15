@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="resendOTP"
+            type="Integer" />
+
+        <variable
+            name="otpVerify"
+            type="com.seasia.poojasarees.viewmodel.auth.OtpVM" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-15dp"
+        android:layout_marginBottom="-15dp"
+        android:background="@drawable/otp_background">
+
+
+            <include
+                android:id="@+id/rlToolbar"
+                layout="@layout/common_toolbar_transparent" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rlToolbar"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_70">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="@dimen/dp_100"
+                        android:layout_centerHorizontal="true"
+                        android:elevation="@dimen/dp_20">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/otp_logo_background" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_50"
+                            android:layout_height="@dimen/dp_50"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/otp_logo" />
+
+                    </RelativeLayout>
+
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/clOtp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dp_20">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvAuthenticate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_50"
+                            android:layout_marginRight="@dimen/dp_20"
+                            android:layout_marginBottom="@dimen/dp_25"
+                            android:background="@color/colorWhite"
+                            app:cardCornerRadius="@dimen/dp_10"
+                            app:cardElevation="@dimen/dp_10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/dp_10"
+                                android:layout_marginTop="@dimen/dp_16"
+                                android:layout_marginRight="@dimen/dp_10"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                tools:ignore="MissingConstraints">
+
+                                <TextView
+                                    android:id="@+id/tvForgotPasswordHeading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/dp_55"
+                                    android:text="@string/forgot_password"
+                                    android:textColor="@color/psOrange"
+                                    android:textSize="@dimen/sp_20" />
+
+                                <TextView
+                                    android:id="@+id/tv_otp_sent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dp_15"
+                                    android:gravity="center"
+                                    android:text="@string/verification_code_msg"
+                                    android:textSize="@dimen/sp_16"
+                                    app:font="@{`regular`}"
+                                    tools:ignore="MissingConstraints"
+                                    tools:layout_editor_absoluteX="116dp"
+                                    tools:layout_editor_absoluteY="306dp" />
+
+                               <!-- <TextView
+                                    android:id="@+id/tv_otp_email"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_2"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="@dimen/sp_8"
+                                    app:font="@{`semibold`}" />-->
+
+                        <!--        <com.goodiebag.pinview.Pinview
+                                    android:id="@+id/pinview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dp_80"
+                                    android:layout_marginBottom="@dimen/dp_30"
+                                    app:cursorVisible="false"
+                                    app:hint=""
+                                    app:forceKeyboard="true"
+                                    app:inputType="number"
+                                    app:password="false"
+                                    app:pinBackground="@drawable/shape_round_corner_back"
+                                    app:pinHeight="@dimen/dp_35"
+                                    app:pinLength="6"
+                                    app:pinWidth="@dimen/dp_30"
+                                    app:textSize="@dimen/sp_10" />-->
+
+                                <!--android:visibility="@{resendOTP==1}"-->
+                                <TextView
+                                    android:id="@+id/tv_resend_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dp_10"
+                                    android:text="@string/resend_time"
+                                    android:textColor="@color/color_primary_blue"
+                                    android:textSize="@dimen/sp_18"
+                                    android:visibility="gone"
+                                    app:font="@{`semibold`}" />
+
+                                <!--android:visibility="@{resendOTP==1}"-->
+
+                                <TextView
+                                    android:id="@+id/tv_resend1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dp_10"
+                                    android:text="@string/resend_otp"
+                                    android:textColor="@color/color_primary_blue"
+                                    android:textSize="@dimen/sp_14"
+                                    android:visibility="gone"
+                                    app:font="@{`semibold`}" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:elevation="@dimen/dp_15"
+                            app:layout_anchor="@id/cvAuthenticate"
+                            app:layout_anchorGravity="bottom|center">
+
+                            <!--android:onClick="@{(v) -> otpVerify.onOtpSubmit(pinview)}"-->
+                            <Button
+                                android:id="@+id/btnSubmit"
+                                android:layout_width="@dimen/dp_100"
+                                android:layout_height="@dimen/dp_40"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp_25"
+                                android:background="@drawable/btn_gradient_img2"
+                                android:text="@string/otp_submit"
+                                android:textColor="@color/colorWhite"
+                                android:visibility="visible" />
+
+                        </RelativeLayout>
+
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                    <!--android:onClick="@{(v) -> otpVerify.onOtpSubmit(v, pinview)}"-->
+                    <TextView
+                        android:id="@+id/tvResend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/clOtp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:padding="@dimen/dp_8"
+                        android:text="@string/resend_otp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/psOrange"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/sp_14"
+                        />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_300"
+                        android:layout_below="@id/tvResend"
+                        android:orientation="vertical"/>
+
+               <!--     <TextView
+                        android:id="@+id/tv_resend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/clOtp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:gravity="center"
+                        android:onClick="@{(v) -> otpVerify.onOtpSubmit(pinview)}"
+                        android:padding="@dimen/dp_8"
+                        android:text="@string/resend_otp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/psOrange"
+                        android:textSize="@dimen/sp_14"
+                        android:visibility="@{resendOTP==0}"
+                        app:font="@{`bold`}"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="116dp"
+                        tools:layout_editor_absoluteY="306dp" />-->
+                </RelativeLayout>
+            </ScrollView>
+    </RelativeLayout>
+</layout>

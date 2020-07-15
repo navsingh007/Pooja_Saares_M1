@@ -1,0 +1,170 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/loginColor</item>
+    </style>
+
+    <style name="EditTextHint" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/hintColor</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+<!--        <item name="colorPrimary">@color/loginColor</item>
+        <item name="colorPrimaryDark">@color/loginColor</item>
+        <item name="colorAccent">@color/loginColor</item>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">false</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:statusBarColor" tools:targetApi="LOLLIPOP">@android:color/transparent</item>
+        <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="android:textViewStyle">@style/MontserratTextViewStyle</item>
+        <item name="android:buttonStyle">@style/MontserratButtonStyle</item>
+
+        <!--<item name="otpViewStyle">@style/OtpWidget.OtpView</item>-->
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- custom themes -->
+    <style name="transparent_dialog_borderless" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- Customized Text theme -->
+    <style name="AppcompatTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="colorAccent">@color/colorBlack</item>
+
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:buttonStyle">@style/MontserratButtonStyle</item>
+    </style>
+
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="MyTabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
+        <item name="tabIndicatorHeight">5dp</item>
+    </style>
+
+    <style name="MyTabTextAppearance" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <!--    <style name="TextAppearance.Widget.TabWidget">
+            <item name="textSize">14sp</item>
+            <item name="textStyle">normal</item>
+            <item name="textColor">@color/tab_indicator_text</item>
+        </style>-->
+
+
+    <!-- material theme -->
+    <style name="floating_et" parent="AppTheme">
+        <!--<item name="background">@drawable/et_underline_thickness</item>-->
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorGrey</item>
+        <item name="colorControlHighlight">@color/colorGrey</item>
+        <item name="colorPrimary">@color/hintColorLight</item>
+        <item name="colorAccent">@color/hintColorLight</item>
+        <item name="android:textColorHint">@color/hintColorLight</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="spinner_back" >
+        <item name="background">@drawable/et_underline_thickness</item>
+    </style>
+
+    <!--parent="android:Widget.TextView.SpinnerItem"-->
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    </style>
+
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorGrey</item>
+        <item name="colorControlHighlight">@color/colorGrey</item>
+        <item name="colorPrimary">@color/hintColorLight</item>
+        <item name="colorAccent">@color/hintColorLight</item>
+        <item name="android:textColorHint">@color/hintColorLight</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+
+        <item name="android:textSize">4.5sp</item>
+    </style>
+
+
+    <style name="ThemeSpinner">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/colorGrey</item>
+        <item name="colorBackgroundFloating">@color/colorWhite</item>
+        <item name="android:color">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorPrimary">@color/hintColorLight</item>
+        <item name="colorAccent">@color/hintColorLight</item>
+        <item name="android:textColorHint">@color/hintColorLight</item>
+        <item name="android:state_activated">false</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+
+        <item name="android:textSize">4.5sp</item>
+    </style>
+
+    <style name="floating_spinner" parent="AppTheme">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorGrey</item>
+        <item name="colorControlHighlight">@color/colorGrey</item>
+        <item name="colorPrimary">@color/hintColorLight</item>
+        <item name="colorAccent">@color/hintColorLight</item>
+        <item name="android:textColorHint">@color/hintColorLight</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+
+        <item name="android:textSize">4.5sp</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MontserratTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="MontserratButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <!-- For Navigation Drawer -->
+    <!--    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        </style>
+
+        <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+            <item name="homeAsUpIndicator">@drawable/ic_tick</item>
+            <item name="android:homeAsUpIndicator">@drawable/ic_tick</item>
+            <item name="spinBars">true</item>
+            <item name="color">@android:color/black</item>
+        </style>-->
+
+    <!-- Date picker style -->
+    <style name="datePickerStyle" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+</resources>

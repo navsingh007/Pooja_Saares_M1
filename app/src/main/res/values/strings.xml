@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="app_name">Pooja Sarees</string>
+    <string name="action_settings">Settings</string>
+    <string name="internet_connection">Please check your internet connection</string>
+    <string name="serverErrorTitle">Server Issue</string>
+    <string name="serverErrorDesciption">Please wait for some time and try again later</string>
+    <string name="dialog_coming_soon">Coming Soon</string>
+    <string name="dialogWorkInprogress">Work in progress</string>
+
+    <!-- Login -->
+    <string name="login_heading">Login</string>
+    <string name="login_mobile">Mobile Number</string>
+    <string name="login_password">Password</string>
+    <string name="login_forgot_pass">Forgot Password?</string>
+    <string name="login_dont_have_account">Don\'t have an account? </string>
+    <string name="login_sign_up">&#160;Sign Up</string>
+    <string name="login_hindi">View in Hindi</string>
+    <string name="login_valid_mobile">Please enter valid mobile number</string>
+    <string name="login_pass_hint_warn">Please enter Password</string>
+    <string name="login_pass_hint">Password must contain at least 6 characters</string>
+    <string name="login_success">Logged In successfully</string>
+    <string name="login_phone_not_registered">Mobile Number is not registered</string>
+    <string name="login_invalid_mobile_or_pass">Please enter correct password</string>
+    <string name="login_acc_not_approved">Your account is not approved by Admin.</string>
+    <string name="login_mobile_n_password">Please enter Mobile Number and Password</string>
+
+    <!-- Sign-up -->
+    <string name="register_heading">Register</string>
+    <string name="register_first_name">First Name*</string>
+    <string name="register_last_name">Last Name*</string>
+    <string name="register_shop_name">Shop Name</string>
+    <string name="register_town">Town/City*</string>
+    <string name="register_mobile_no">Mobile Number*</string>
+    <string name="register_set_password">Set Password*</string>
+    <string name="register_password_hint">At least 6 characters!</string>
+    <string name="register_submit">Submit</string>
+    <string name="register_thanks"><u>THANK YOU</u></string>
+    <string name="register_ok">Ok</string>
+    <string name="register_successfully">For registering with us. Your account is under verification.</string>
+    <string name="register_warn_title">Please enter</string>
+    <string name="register_warn_valid_title">Please enter valid</string>
+
+    <string name="register_warn_name">Please enter First Name</string>
+    <string name="register_warn_last_name">Please enter Last Name</string>
+    <string name="register_warn_mobile_no">Please enter Mobile Number</string>
+    <string name="register_warn_town">Please enter Town/City</string>
+    <string name="register_warn_password">Please enter Password</string>
+
+    <string name="register_valid_name">Please enter valid First Name</string>
+    <string name="register_valid_last_name">Please enter valid Last Name</string>
+    <string name="register_valid_mobile_no">Please enter valid Mobile Number</string>
+    <string name="register_valid_town">Please enter valid Town/City</string>
+
+    <string name="register_warn_password_hint">Password must contain at least 6 characters</string>
+    <string name="register_warn_mobile">Please enter valid mobile number</string>
+    <string name="register_warn_password_chars">Password must contain at least 1 Capital letter, 1 Small letter, 1 Special character and 1 Number</string>
+    <string name="register_warn_shopName">Please enter valid Shop Name</string>
+    <string name="register_phone_already_exist">User with this mobile number already exists</string>
+    <string name="register_enable_gps">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="register_select_town">Please select Town/City</string>
+
+    <!-- Forgot Password -->
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password_description">Please enter the registered mobile number. We will send you an OTP</string>
+    <string name="forgot_registered_no">Registered Mobile Number</string>
+    <string name="forgot_invalid_mobile">Please enter valid mobile number.</string>
+    <string name="forgot_submit">Submit</string>
+
+    <!-- OTP Verify -->
+    <string name="verification_code">Verification</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="something_error">Something went wrong</string>
+    <string name="verification_code_msg">A confirmation OTP has been sent on your Mobile Number:</string>
+    <string name="resend_time">Resend Time </string>
+    <string name="resend_otp_time">Resend OTP Time</string>
+    <string name="verification_account">Verification Account</string>
+    <string name="otp_submit">Submit</string>
+    <string name="otp_hint">Please enter 6 digit OTP number</string>
+    <string name="otp_hint_warn">Please enter OTP</string>
+    <string name="otp_sent">OTP sent successfully</string>
+    <string name="otp_verified">OTP verified successfully</string>
+    <string name="otp_invalid">Invalid OTP</string>
+    <string name="otp_invalid_mobile_number">Invalid Mobile Number</string>
+
+    <!-- Change Password -->
+    <string name="change_password">Change Password</string>
+    <string name="change_new_password">Enter New Password*</string>
+    <string name="change_confirm_password">Confirm Password*</string>
+    <string name="change_submit">Submit</string>
+    <string name="change_password_enter_new_pass">Please enter new password</string>
+    <string name="change_password_enter_confirm_pass">Please enter confirm password</string>
+    <string name="change_password_not_match">Password and Confirm Password should be same</string>
+    <string name="change_password_hint">Password must contain at least 6 characters!</string>
+    <string name="change_password_confirm_title">Password Changed</string>
+    <string name="change_password_confirm_msg">Password changed successfully</string>
+
+    <!-- Profile -->
+    <string name="profile_heading">Profile</string>
+    <string name="profile_edit_heading">Edit Profile</string>
+    <string name="profile_name">First Name</string>
+    <string name="profile_last_name">Last Name</string>
+    <string name="profile_shop_name">Shop Name</string>
+    <string name="profile_town">Town/City</string>
+    <string name="profile_mobile_no">Mobile Number</string>
+    <string name="profile_contact">Contact</string>
+    <string name="profile_personal">Personal</string>
+    <string name="profile_update">Update</string>
+    <string name="profile_cancel">Cancel</string>
+    <string name="profile_dob">DOB</string>
+    <string name="profile_gender">Gender</string>
+    <string name="profile_marital_status">Marital Status</string>
+    <string name="profile_education">Qualification</string>
+    <string name="profile_languages_known">Languages Known</string>
+    <string name="profile_hobbies">Hobbies</string>
+    <string name="profile_email">Email ID</string>
+    <string name="profile_gst_no">GST Number</string>
+    <string name="profile_street">Building / Street</string>
+    <string name="profile_state">State</string>
+    <string name="profile_city">City</string>
+    <string name="profile_pincode">Pin Code</string>
+    <string name="profile_updated">Your profile has been updated successfully</string>
+    <!-- Profile pic selection -->
+    <string name="upload_with_camera">Upload with camera</string>
+    <string name="place_image_here">Upload from gallery</string>
+    <string name="select_option">Select option</string>
+    <string name="session_expire">Session expired, Please login again</string>
+    <string name="profile_updated_title">Success</string>
+    <string name="profile_valid_name">Please enter valid First Name</string>
+    <string name="profile_valid_last_name">Please enter valid Last Name</string>
+    <string name="profile_valid_email">Please enter valid Email Id</string>
+    <string name="profile_valid_gst">Please enter valid GST Number</string>
+    <string name="profile_gender_male">Male</string>
+    <string name="profile_gender_female">Female</string>
+    <string name="profile_gender_not_specified">Not Specified</string>
+    <string name="profile_status_married">Married</string>
+    <string name="profile_status_unmarried">Unmarried</string>
+    <string name="profile_status_divorced">Divorced</string>
+    <string name="profile_pic_success">Profile image uploaded successfully</string>
+    <string name="profile_select_town">Please select Town/City</string>
+    <string name="profile_enter_email">Please enter Email ID</string>
+    <string name="profile_not_valid_dob">Please select valid DOB</string>
+
+    <!-- Webview -->
+    <string name="about_us">About Us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_conditions">Terms &amp; Conditions</string>
+
+    <!-- Home -->
+    <string name="home_title">Home</string>
+    <string name="home_categories">Categories</string>
+    <string name="home_brands">Brands</string>
+    <string name="home_new_arrivals">New Arrival</string>
+    <string name="home_search_hint">Search</string>
+    <string name="home_logout">Logout</string>
+    <string name="home_view_all">View All</string>
+    <string name="home_logout_confirm">Are you sure you want to Logout?</string>
+    <string name="home_collection_title1">All New</string>
+    <string name="home_collection_title2">Collection\'2020</string>
+    <string name="home_exit_app">Exit</string>
+    <string name="home_exit_app_title">Are you sure you want to exit?</string>
+
+    <!-- Dialogs -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Nav Drawer options -->
+    <string name="nav_home">Home</string>
+    <string name="nav_profile">My Profile</string>
+    <string name="nav_my_orders">My Orders</string>
+    <string name="nav_my_fav">My Favourites</string>
+    <string name="nav_saved_address">Saved Address</string>
+    <string name="nav_offers">Offers</string>
+    <string name="nav_notification">Notification</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="nav_terms_n_conditions">Terms &amp; Conditions</string>
+    <string name="nav_privacy_policy">Privacy Policy</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_call_us">Call Us</string>
+    <string name="nav_logout">Logout</string>
+
+
+    <!--********************** MILESTONE - 2 **********************-->
+
+
+    <string name="address_title">Address List</string>
+    <string name="address_add_new">Add Address</string>
+    <string name="address_saved_address">Saved Addresses</string>
+    <string name="address_no_record_found">No Record Found</string>
+
+    <!-- Add address -->
+    <string name="address_shop_name">Shop Name*</string>
+    <string name="address_street">Building/Street*</string>
+    <string name="address_town">Town/City*</string>
+    <string name="address_district">District*</string>
+    <string name="address_pincode">Pin Code*</string>
+    <string name="address_state">State*</string>
+
+    <string name="address_enter_shop_name">Please enter Shop Name</string>
+    <string name="address_enter_street">Please enter Street Name</string>
+    <string name="address_enter_town">Please enter Town/City</string>
+    <string name="address_enter_district">Please enter District</string>
+    <string name="address_enter_pincode">Please enter Pin code</string>
+    <string name="address_select_state">Please select State</string>
+    <string name="address_min_shop">Please enter valid Shop Name</string>
+    <string name="address_min_street">Please enter valid street</string>
+    <string name="address_min_town">Please enter valid Town/City</string>
+    <string name="address_min_district">Please enter valid District</string>
+    <string name="address_min_pincode">Please enter valid Pincode</string>
+    <string name="address_invalid_pincode">Pin code is Invalid</string>
+</resources>

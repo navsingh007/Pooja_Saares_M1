@@ -1,0 +1,40 @@
+package com.seasia.poojasarees.utils
+
+internal object PreferenceKeys {
+
+    var LOGIN_TOKEN = "login_token"
+    var LOGIN_TOKEN1 = "login_token"
+    val CUSTOMER_ID = "user_id"
+    val CUSTOMER_TOKEN = "customer_token"
+    val FIRST_NAME = "first_name"
+    val LAST_NAME = "last_name"
+    val PHONE_NO = "phoneNo"
+    val EMAIL = "email"
+    val ALL_STATES = "allStates"
+    val ALL_TOWNS = "allTowns"
+    val PROFILE_PIC = "profile_pic"
+    val ABOUT_US = "about_us"
+    val TERMS_N_CONDITIONS = "terms_conditions"
+    val PRIVACY_POLICY = "privacyPolicy"
+    val IS_LOGIN = "isLogin"
+    val BRANDS = "brands"
+    val USER_DEFAULT_ADDRESS = "defaultAddress"
+    val USER_ALL_ADDRESS = "allAddress"
+    val DEFAULT_ADDRESS_ID = "defaultAddressId"
+    val ADMIN_TOKEN = "Bearer 7j77knst6sbjwpqbur98bflj8opxzrh0"
+    var TOKEN = "0"
+    var GENDER = "userGender"
+
+
+//    val EMAIL = "email"
+//    val PASSWORD = "password"
+//    val FACEBOOK_ID = "facebook_id"
+//    val PHONE_NUMBER = "phoneNumber"
+//    val OTP_VERIFIED = "phoneNumber"
+//    val IMAGE_URL = "pub/media/catalog/product/"
+//    val ZIPCODE = "pin_code"
+//    const val STORE_ID = "store_id"
+//    const val STORE_NAME = "store_name"
+//    const val CURRENCY_CODE = "currency_code"
+//    const val IMAGE = "http://stgsp1.appsndevs.com:9040/Organic/"
+}

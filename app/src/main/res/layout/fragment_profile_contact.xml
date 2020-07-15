@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="profile"
+            type="com.seasia.poojasarees.model.helper.Profile" />
+    </data>
+
+    <!--    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-15dp"
+            android:layout_marginBottom="-15dp"
+            android:background="@android:color/transparent">-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150">
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_25"
+                android:background="@color/colorWhite"
+                app:cardCornerRadius="@dimen/dp_20"
+                app:cardElevation="@dimen/dp_10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_15">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/etNameHeading"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:layout_weight="1"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:theme="@style/floating_et"
+                            app:hintEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_underline_thickness"
+                                android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:hint="@string/profile_name"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:maxLength="32"
+                                android:text="@={profile.name}"
+                                android:theme="@style/floating_et" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/etLastNameHeading"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:layout_weight="1"
+                            android:theme="@style/floating_et"
+                            app:hintEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etLastName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_underline_thickness"
+                                android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                                android:hint="@string/profile_last_name"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:maxLength="32"
+                                android:text="@={profile.lastName}"
+                                android:theme="@style/floating_et" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etShopHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etShop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/et_underline_thickness"
+                            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्0123456789"
+                            android:hint="@string/profile_shop_name"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={profile.shopName}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etMobileNoHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMobileNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/et_underline_thickness"
+                            android:digits="12345677890"
+                            android:editable="false"
+                            android:enabled="false"
+                            android:focusable="false"
+                            android:hint="@string/profile_mobile_no"
+                            android:imeOptions="actionNext"
+                            android:inputType="none"
+                            android:maxLength="10"
+                            android:text="@={profile.mobileNo}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etEmailHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/et_underline_thickness"
+                            android:hint="@string/profile_email"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={profile.emailId}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etGstNoHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etGstNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/et_underline_thickness"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                            android:hint="@string/profile_gst_no"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="15"
+                            android:text="@={profile.gstNo}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--     <com.google.android.material.textfield.TextInputLayout
+                             android:id="@+id/etGstNoHeading"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_marginLeft="@dimen/dp_15"
+                             android:layout_marginRight="@dimen/dp_15"
+                             android:theme="@style/floating_et"
+                             app:hintEnabled="true">
+
+                             <com.google.android.material.textfield.TextInputEditText
+                                 android:id="@+id/etGstNo"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:hint="@string/profile_gst_no"
+                                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                                 android:imeOptions="actionNext"
+                                 android:inputType="textCapCharacters"
+                                 android:text="@={profile.gstNo}"
+                                 android:textAllCaps="true"
+                                 android:maxLength="15"
+                                 android:theme="@style/floating_et" />
+
+                         </com.google.android.material.textfield.TextInputLayout>-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etStreetHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etStreet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/profile_street"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={profile.street}"
+                            android:theme="@style/floating_et"
+                            android:visibility="gone" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--app:boxBackgroundColor="@color/red"
+                    app:boxStrokeColor="@color/red"
+                    android:background="@android:color/transparent"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+
+                            android:theme="@style/floating_spinner"-->
+
+
+                    <!--<com.tiper.MaterialSpinner
+                        android:id="@+id/spnTown"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginRight="@dimen/dp_15"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        app:spinnerMode="dropdown"
+                        android:hint="@string/register_town"
+                        android:theme="@style/spinnerItemStyle" />-->
+
+
+                        <!--android:background="@drawable/et_spinner_thickness"-->
+                        <com.tiper.MaterialSpinner
+                            android:id="@+id/spnTown"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="-5dp"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:background="@drawable/et_spinner_thickness"
+                            android:hint="@string/profile_town"
+                            android:theme="@style/ThemeSpinner"
+                             />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etTownHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginTop="-10dp"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        android:visibility="gone"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzँ ं ःअआइईउऊऋएऐऑओऔकखगघचछजझञटठडढणतथदधनपफबभमयरलवशषसह ़ ा ि ी ु ू ृ ॅ े ै ॉ ो ौ ्"
+                            android:hint="@string/profile_town"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:maxLength="32"
+                            android:text="@={profile.town}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--android:text="@={profile.state}"-->
+                    <com.tiper.MaterialSpinner
+                        android:id="@+id/spnState"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:hint="@string/profile_state"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etPincodeHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:theme="@style/floating_et"
+                        android:visibility="gone"
+                        app:hintEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789"
+                            android:hint="@string/profile_pincode"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:text="@={profile.pincode}"
+                            android:theme="@style/floating_et" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!--                    <Button
+                                            android:id="@+id/btn_continue"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dp_25"
+                                            android:layout_marginTop="@dimen/dp_25"
+                                            android:layout_marginRight="@dimen/dp_25"
+                                            android:onClick="@{(v) -> profileVM.onUpdateClick(profile)}"
+                                            android:text="@string/profile_update"
+                                            android:textColor="@color/colorBlack"
+                                            android:visibility="gone" />-->
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!--</RelativeLayout>-->
+</layout>

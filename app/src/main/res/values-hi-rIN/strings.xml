@@ -1,0 +1,211 @@
+<resources>
+    <string name="app_name">पूजा साड़ियाँ</string>
+    <string name="action_settings">समायोजन</string>
+    <string name="internet_connection">कृपया अपने इंटरनेट कनेक्शन की जाँच करें</string>
+    <string name="serverErrorTitle">सर्वर प्रतिक्रिया नहीं कर रहा है</string>
+    <string name="serverErrorDesciption">कृपया कुछ समय प्रतीक्षा करें या बाद में पुनः प्रयास करें</string>
+    <string name="dialog_coming_soon">जल्द आ रहा है</string>
+    <string name="dialogWorkInprogress">कार्य प्रगति पर है</string>
+
+    <!-- Login -->
+    <string name="login_heading">लॉग इन करें</string>
+    <string name="login_mobile">मोबाइल नंबर</string>
+    <string name="login_password">पासवर्ड</string>
+    <string name="login_forgot_pass">पासवर्ड भूल गए?</string>
+    <string name="login_dont_have_account">क्या आपके पास कोई खाता नहीं है? </string>
+    <string name="login_sign_up">&#160;खाता खोलेंं</string>
+    <string name="login_hindi">अंग्रेजी में देखें</string>
+    <string name="login_valid_mobile">कृपया मान्य मोबाइल नंबर दर्ज करें</string>
+    <string name="login_pass_hint_warn">कृपया पासवर्ड दर्ज करें</string>
+    <string name="login_pass_hint">पासवर्ड में कम से कम 6 अक्षर होने चाहिए</string>
+    <string name="login_success">सफलतापूर्वक लॉग इन हो चुका है</string>
+    <string name="login_phone_not_registered">मोबाइल नंबर पंजीकृत नहीं है</string>
+    <string name="login_invalid_mobile_or_pass">कृपया सही पासवर्ड दर्ज करें</string>
+    <string name="login_acc_not_approved">आपका खाता व्यवस्थापक द्वारा अनुमोदित नहीं है</string>
+    <string name="login_mobile_n_password">कृपया मोबाइल नंबर और पासवर्ड दर्ज करेंd</string>
+
+    <!-- Sign-up -->
+    <string name="register_heading">रजिस्टर करें</string>
+    <string name="register_first_name">पहला नाम*</string>
+    <string name="register_last_name">अंतिम नाम*</string>
+    <string name="register_shop_name">दुकान का नाम</string>
+    <string name="register_town">नगर/शहर*</string>
+    <string name="register_mobile_no">मोबाइल नंबर*</string>
+    <string name="register_set_password">पासवर्ड सेट करें*</string>
+    <string name="register_password_hint">कम से कम 6 वर्ण!</string>
+    <string name="register_submit">प्रस्तुत</string>
+    <string name="register_thanks"><u>धन्यवाद</u></string>
+    <string name="register_ok">ठीक</string>
+    <string name="register_successfully">हमारे साथ पंजीकरण के लिए। आपके खाते का सत्यापन चल रहा है</string>
+    <string name="register_warn_title">कृपया दर्ज करें</string>
+    <string name="register_warn_valid_title">कृपया मान्य दर्ज करें</string>
+    <string name="register_select_town">कृपया नगर/शहर का चयन करें</string>
+
+    <string name="register_warn_name">कृपया पहला नाम दर्ज करें</string>
+    <string name="register_warn_last_name">कृपया अंतिम नाम दर्ज करें</string>
+    <string name="register_warn_mobile_no">कृपया मोबाइल नंबर दर्ज करें</string>
+    <string name="register_warn_town">कृपया नगर/शहर दर्ज करें</string>
+    <string name="register_warn_password">कृप्या पास्वर्ड दर्ज करें</string>
+
+    <string name="register_valid_name">कृपया मान्य प्रथम नाम दर्ज करें</string>
+    <string name="register_valid_last_name">कृपया मान्य अंतिम नाम दर्ज करें</string>
+    <string name="register_valid_mobile_no">कृपया मान्य मोबाइल नंबर दर्ज करें</string>
+    <string name="register_valid_town">कृपया मान्य नगर/शहर दर्ज करें</string>
+
+    <string name="register_warn_password_hint">पासवर्ड में कम से कम 6 अक्षर होने चाहिए</string>
+    <string name="register_warn_mobile">कृपया मान्य मोबाइल नंबर दर्ज करें</string>
+    <string name="register_warn_password_chars">पासवर्ड में अंग्रेजी का कम से कम 1 कैपिटल लेटर, 1 छोटा अक्षर, 1 स्पेशल कैरेक्टर और 1 नंबर होना चाहिए</string>
+    <string name="register_warn_shopName">कृपया मान्य दुकान का नाम दर्ज करें</string>
+    <string name="register_phone_already_exist">इस मोबाइल नंबर के साथ उपयोगकर्ता पहले से मौजूद है</string>
+    <string name="register_enable_gps">आपका जीपीएस अक्षम है, क्या आप इसे सक्षम करना चाहते हैं?</string>
+
+    <!-- Forgot Password -->
+    <string name="forgot_password">पासवर्ड भूल गए</string>
+    <string name="forgot_password_description">कृपया पंजीकृत मोबाइल नंबर दर्ज करें। हम आपको एक ओ.टी.पी. भेजेंगे</string>
+    <string name="forgot_registered_no">पंजीकृत मोबाइल नंबर</string>
+    <string name="forgot_invalid_mobile">कृपया मान्य मोबाइल नंबर दर्ज करें</string>
+    <string name="forgot_submit">प्रस्तुत</string>
+
+    <!-- OTP Verify -->
+    <string name="verification_code">सत्यापन</string>
+    <string name="resend_otp">ओ.टी.पी. पुनः भेजें</string>
+    <string name="something_error">कुछ गलत हो गया</string>
+    <string name="verification_code_msg">आपके मोबाइल नंबर पर एक ओटीपी भेजा गया है:</string>
+    <string name="resend_time">भेजने का समय </string>
+    <string name="resend_otp_time">ओ.टी.पी. भेजने का समय</string>
+    <string name="verification_account">सत्यापन खाता</string>
+    <string name="otp_submit">प्रस्तुत</string>
+    <string name="otp_hint">कृपया 6 अंकों का ओटीपी नंबर दर्ज करें</string>
+    <string name="otp_hint_warn">कृपया ओटीपी दर्ज करें</string>
+    <string name="otp_sent">ओ.टी.पी. को सफलतापूर्वक भेजा गया</string>
+    <string name="otp_verified">ओ.टी.पी. सफलतापूर्वक सत्यापित किया गया</string>
+    <string name="otp_invalid">अमान्य ओ.टी.पी.</string>
+    <string name="otp_invalid_mobile_number">अमान्य मोबाइल नंबर</string>
+
+    <!-- Change Password -->
+    <string name="change_password">पासवर्ड बदलें</string>
+    <string name="change_new_password">नया पासवर्ड दर्ज करें*</string>
+    <string name="change_confirm_password">पासवर्ड की पुष्टि कीजिये*</string>
+    <string name="change_submit">प्रस्तुत</string>
+    <string name="change_password_enter_new_pass">कृपया नया पासवर्ड दर्ज करें</string>
+    <string name="change_password_enter_confirm_pass">कृपया पुष्टि पासवर्ड दर्ज करें</string>
+    <string name="change_password_not_match">पासवर्ड और कन्फर्म पासवर्ड समान होना चाहिए</string>
+    <string name="change_password_hint">पासवर्ड में कम से कम 6 अक्षर होने चाहिए!</string>
+    <string name="change_password_confirm_title">पासवर्ड बदला गया</string>
+    <string name="change_password_confirm_msg">पासवर्ड सफलतापूर्वक बदला गया</string>
+
+    <!-- Profile -->
+    <string name="profile_heading">प्रोफ़ाइल</string>
+    <string name="profile_edit_heading">प्रोफ़ाइल संपादित करें</string>
+    <string name="profile_name">पहला नाम</string>
+    <string name="profile_last_name">अंतिम नाम</string>
+    <string name="profile_shop_name">दुकान का नाम</string>
+    <string name="profile_town">नगर / शहर</string>
+    <string name="profile_mobile_no">मोबाइल नंबर</string>
+    <string name="profile_contact">संपर्क</string>
+    <string name="profile_personal">निजी</string>
+    <string name="profile_update">अपडेट करें</string>
+    <string name="profile_cancel">रद्द करना</string>
+    <string name="profile_dob">जन्म तिथि</string>
+    <string name="profile_gender">लिंग</string>
+    <string name="profile_marital_status">वैवाहिक स्थिति</string>
+    <string name="profile_education">योग्यता</string>
+    <string name="profile_languages_known">ज्ञात भाषाएँ</string>
+    <string name="profile_hobbies">शौक</string>
+    <string name="profile_email">ईमेल आईडी</string>
+    <string name="profile_gst_no">जीएसटी नंबर</string>
+    <string name="profile_street">भवन / गली</string>
+    <string name="profile_state">राज्य</string>
+    <string name="profile_city">शहर</string>
+    <string name="profile_pincode">पिन कोड</string>
+    <string name="profile_updated">प्रोफाइल अपडेटेड सफल</string>
+    <!-- Profile pic selection -->
+    <string name="upload_with_camera">कैमरे के साथ अपलोड करें</string>
+    <string name="place_image_here">गैलरी से अपलोड करें</string>
+    <string name="select_option">विकल्प चुनें</string>
+    <string name="session_expire">सत्र समाप्त हो गया, कृपया फिर से लॉगिन करें</string>
+    <string name="profile_updated_title">सफलता</string>
+    <string name="profile_valid_name">कृपया मान्य प्रथम नाम दर्ज करें</string>
+    <string name="profile_valid_last_name">कृपया मान्य अंतिम नाम दर्ज करें</string>
+    <string name="profile_valid_email">कृपया मान्य ईमेल आईडी दर्ज करें</string>
+    <string name="profile_valid_gst">कृपया मान्य जी एस टी नंबर दर्ज करें</string>
+    <string name="profile_gender_male">नर</string>
+    <string name="profile_gender_female">महिला</string>
+    <string name="profile_gender_not_specified">निर्दिष्ट नहीं है</string>
+    <string name="profile_status_married">विवाहित</string>
+    <string name="profile_status_unmarried">अविवाहित</string>
+    <string name="profile_status_divorced">तलाकशुदा</string>
+    <string name="profile_pic_success">प्रोफ़ाइल छवि सफलतापूर्वक अपलोड की गई</string>
+    <string name="profile_select_town">कृपया नगर/शहर का चयन करें</string>
+    <string name="profile_enter_email">कृपया ईमेल आईडी दर्ज करें</string>
+    <string name="profile_not_valid_dob">कृपया जन्म तिथि का चयन करें</string>
+
+    <!-- Webview -->
+    <string name="about_us">हमारे बारे में</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="terms_and_conditions">नियम और शर्तें</string>
+
+    <!-- Home -->
+    <string name="home_title">होम</string>
+    <string name="home_categories">श्रेणियाँ</string>
+    <string name="home_brands">ब्रांड्स</string>
+    <string name="home_new_arrivals">नवागन्तुक</string>
+    <string name="home_search_hint">खोज</string>
+    <string name="home_logout">लॉग आउट</string>
+    <string name="home_view_all">सभी देखें</string>
+    <string name="home_logout_confirm">क्या आप लॉग आउट करना चाहते हैं?</string>
+    <string name="home_collection_title1">बिलकुल नया</string>
+    <string name="home_collection_title2">संग्रह\'2020</string>
+    <string name="home_exit_app">बाहर जाएं</string>
+    <string name="home_exit_app_title">क्या आप निश्चित हैं आपकी बाहर निकलने की इच्छा है?</string>
+
+    <!-- Dialogs -->
+    <string name="yes">हाँ</string>
+    <string name="no">नहीं</string>
+
+    <!-- Nav Drawer options -->
+    <string name="nav_home">होम</string>
+    <string name="nav_profile">मेरी प्रोफाइल</string>
+    <string name="nav_my_orders">मेरे आदेश</string>
+    <string name="nav_my_fav">मेरे पसंदीदा</string>
+    <string name="nav_saved_address">सहेजा हुआ पता</string>
+    <string name="nav_offers">ऑफर</string>
+    <string name="nav_notification">अधिसूचना</string>
+    <string name="nav_about_us">हमारे बारे में</string>
+    <string name="nav_terms_n_conditions">नियम और शर्तें</string>
+    <string name="nav_privacy_policy">गोपनीयता नीति</string>
+    <string name="nav_settings">समायोजन</string>
+    <string name="nav_call_us">हमें कॉल करें</string>
+    <string name="nav_logout">लॉग आउट</string>
+
+
+
+    <!--********************** MILESTONE - 2 **********************-->
+
+
+    <string name="address_title">Address List</string>
+    <string name="address_add_new">Add Address</string>
+    <string name="address_saved_address">Saved Addresses</string>
+    <string name="address_no_record_found">No Record Found</string>
+
+    <!-- Add address -->
+    <string name="address_shop_name">Shop Name*</string>
+    <string name="address_street">Building/Street*</string>
+    <string name="address_town">नगर / शहर*</string>
+    <string name="address_district">District*</string>
+    <string name="address_pincode">Pin Code*</string>
+    <string name="address_state">State*</string>
+
+    <string name="address_enter_shop_name">Please enter Shop Name</string>
+    <string name="address_enter_street">Please enter Street Name</string>
+    <string name="address_enter_town">Please enter Town/City</string>
+    <string name="address_enter_district">Please enter District</string>
+    <string name="address_enter_pincode">Please enter Pin code</string>
+    <string name="address_select_state">Please select State</string>
+    <string name="address_min_shop">Please enter valid Shop Name</string>
+    <string name="address_min_street">Please enter valid street</string>
+    <string name="address_min_town">Please enter valid Town/City</string>
+    <string name="address_min_district">Please enter valid District</string>
+    <string name="address_min_pincode">Please enter valid Pincode</string>
+    <string name="address_invalid_pincode">Pin code is Invalid</string>
+</resources>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="profile"
+            type="com.seasia.poojasarees.model.helper.Profile" />
+    </data>
+
+<!--    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-15dp"
+        android:layout_marginBottom="-15dp"
+        android:background="@android:color/transparent">-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_150">
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_40"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_25"
+                    android:background="@color/colorWhite"
+                    app:cardCornerRadius="@dimen/dp_20"
+                    app:cardElevation="@dimen/dp_10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dp_15"
+                        android:paddingRight="@dimen/dp_15"
+                        android:paddingBottom="@dimen/dp_15">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/etDobHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:theme="@style/floating_et"
+                            app:hintEnabled="true">
+
+                            <!--app:editTextOnClick="@{`Date`}"-->
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etDob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_underline_thickness"
+                                android:drawableRight="@drawable/ic_date"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:hint="@string/profile_dob"
+                                android:imeOptions="actionNext"
+                                android:inputType="none"
+                                android:maxLength="32"
+                                android:paddingRight="@dimen/dp_10"
+                                android:text="@={profile.dob}"
+                                android:theme="@style/floating_et"
+                                 />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!--android:text="@={profile.gender}"-->
+                       <!-- <com.tiper.MaterialSpinner
+                            android:id="@+id/spnGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:theme="@style/floating_spinner"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:hint="@string/profile_gender"
+                            />-->
+
+                        <com.tiper.MaterialSpinner
+                            android:id="@+id/spnGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:paddingLeft="-5dp"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:background="@drawable/et_spinner_thickness"
+                            android:hint="@string/profile_gender"
+                            android:theme="@style/ThemeSpinner"
+                            />
+
+                     <!--   <com.tiper.MaterialSpinner
+                            android:id="@+id/spnMaritalStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:theme="@style/floating_spinner"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:hint="@string/profile_marital_status" />-->
+
+                        <com.tiper.MaterialSpinner
+                            android:id="@+id/spnMaritalStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:paddingLeft="-5dp"
+                            android:background="@drawable/et_spinner_thickness"
+                            android:hint="@string/profile_marital_status"
+                            android:theme="@style/ThemeSpinner"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/etEducationalQualificationsHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:theme="@style/floating_et"
+                            app:hintEnabled="true">
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etEducationalQualifications"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_underline_thickness"
+                                android:hint="@string/profile_education"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:maxLength="32"
+                                android:text="@={profile.education}"
+                                android:theme="@style/floating_et" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/etLanguageKnownHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:theme="@style/floating_et"
+                            app:hintEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etLanguageKnown"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_underline_thickness"
+                                android:hint="@string/profile_languages_known"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:maxLength="32"
+                                android:text="@={profile.languagesKnown}"
+                                android:theme="@style/floating_et" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/etHobbyHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:theme="@style/floating_et"
+                            app:hintEnabled="true">
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etHobby"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_underline_thickness"
+                                android:hint="@string/profile_hobbies"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:maxLength="32"
+                                android:text="@={profile.hobbies}"
+                                android:theme="@style/floating_et" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/btn_continue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_25"
+                            android:layout_marginTop="@dimen/dp_25"
+                            android:layout_marginRight="@dimen/dp_25"
+                            android:text="@string/profile_update"
+                            android:textColor="@color/colorBlack"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_150"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    <!--</RelativeLayout>-->
+</layout>
