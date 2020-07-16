@@ -13,8 +13,7 @@
         android:id="@+id/rlRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:fitsSystemWindows="true"
         android:layout_marginTop="-15dp"
         android:layout_marginBottom="-15dp"
         android:background="@drawable/login_whole">
@@ -32,6 +31,7 @@
         <!--android:layout_marginTop="@dimen/dp_220"-->
 
         <ScrollView
+            android:id="@+id/svRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -42,12 +42,14 @@
                 android:layout_below="@+id/llDummy"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_100"
                 android:paddingBottom="@dimen/dp_45">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_300"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -249,7 +251,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_100" />
+                    android:layout_height="@dimen/dp_100"
+                    android:visibility="gone"/>
 
             </LinearLayout>
         </ScrollView>

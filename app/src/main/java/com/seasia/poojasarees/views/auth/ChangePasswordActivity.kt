@@ -13,6 +13,8 @@ import com.seasia.poojasarees.databinding.ActivityChangePasswordBinding
 import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.utils.DialogssInterface
 import com.seasia.poojasarees.viewmodel.auth.ChangePasswordVM
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 class ChangePasswordActivity : BaseActivity() {
     private lateinit var binding: ActivityChangePasswordBinding
@@ -37,6 +39,7 @@ class ChangePasswordActivity : BaseActivity() {
         setToolbar()
         loadingObserver()
         showUserWarningObserver()
+        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun setToolbar() {
@@ -125,5 +128,20 @@ class ChangePasswordActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+                    if (isOpen) {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+                    } else {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+                    }
+                }
+            })
     }
 }

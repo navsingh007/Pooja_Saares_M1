@@ -2,6 +2,7 @@ package com.seasia.poojasarees.views.profile
 
 import android.content.Intent
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +21,8 @@ import com.seasia.poojasarees.model.response.ProfileOut
 import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.profile.ProfileVM
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 class ProfileActivity : BaseActivity() {
     lateinit var binding: ActivityProfileBinding
@@ -61,6 +64,8 @@ class ProfileActivity : BaseActivity() {
             UtilsFunctions.hideKeyboardActivity(this)
             finish()
         }
+
+        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun setTabsViewPager() {
@@ -223,5 +228,21 @@ class ProfileActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
 //        UtilsFunctions.hideKeyboardActivity(this)
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+
+                    // write your code
+                    if (isOpen) {
+                        binding.rlButtons.visibility = View.GONE
+                    } else {
+                        binding.rlButtons.postDelayed(Runnable { binding.rlButtons.visibility = View.VISIBLE }, 300)
+                    }
+                }
+            })
     }
 }
