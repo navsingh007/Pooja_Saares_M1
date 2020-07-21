@@ -22,25 +22,33 @@ class ProductListingRepo {
         sessionExpire.postValue(false)
     }
 
-    fun getProductListingFilterResponse(categoryId: String, hit: Boolean): MutableLiveData<ProductsByCategoryIdOut> {
+    fun getProductListingFilterResponse(
+        currentPage: String,
+        categoryId: String,
+        hit: Boolean
+    ): MutableLiveData<ProductsByCategoryIdOut> {
         if (hit) {
             PreferenceKeys.TOKEN = "0"
             val service = ApiClient.getApiInterface()
 
-            val call = service.getProductsByCategoryId("category_id",
-                "4",
+            val call = service.getProductsByCategoryId(
+                "category_id",
+                categoryId,
                 "eq",
                 "visibility",
                 "4",
                 "eq",
                 "created_at",
                 "DESC",
-                "10",
-                "1"
+                "2",
+                currentPage
             )
 
             call.enqueue(object : retrofit2.Callback<ProductsByCategoryIdOut> {
-                override fun onFailure(call: retrofit2.Call<ProductsByCategoryIdOut>, t: Throwable) {
+                override fun onFailure(
+                    call: retrofit2.Call<ProductsByCategoryIdOut>,
+                    t: Throwable
+                ) {
 //                    UtilsFunctions.showToastError(t.message!!)
                     apiMsg.postValue(t.message!!)
                     productListingData!!.value = null
@@ -82,7 +90,10 @@ class ProductListingRepo {
         return productListingData!!
     }
 
-    fun getFilterAttributesResponse(filterAttributesIn: JsonObject?, hit: Boolean): MutableLiveData<ProductFilterAttributes> {
+    fun getFilterAttributesResponse(
+        filterAttributesIn: JsonObject?,
+        hit: Boolean
+    ): MutableLiveData<ProductFilterAttributes> {
         if (hit) {
             PreferenceKeys.TOKEN = "0"
             val service = ApiClient.getApiInterface()
@@ -90,7 +101,10 @@ class ProductListingRepo {
             val call = service.getFiltersAttributes(filterAttributesIn)
 
             call.enqueue(object : retrofit2.Callback<ProductFilterAttributes> {
-                override fun onFailure(call: retrofit2.Call<ProductFilterAttributes>, t: Throwable) {
+                override fun onFailure(
+                    call: retrofit2.Call<ProductFilterAttributes>,
+                    t: Throwable
+                ) {
 //                    UtilsFunctions.showToastError(t.message!!)
                     apiMsg.postValue(t.message!!)
                     filtersAttributesData!!.value = null

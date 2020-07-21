@@ -645,8 +645,6 @@ class HomeActivity : BaseActivity(), ChoiceCallBack, DialogssInterface,
     /**
      *  Network update
      */
-
-
     override fun onDestroy() {
         super.onDestroy()
         networkStateReceiver?.removeListener(this)

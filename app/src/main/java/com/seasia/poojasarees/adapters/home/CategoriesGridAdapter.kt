@@ -55,7 +55,6 @@ class CategoriesGridAdapter(
 
         holder.topLayout?.setOnClickListener { onProductClick() }
 
-        Log.d(TAG, "======> ${response.image}")
         Glide.with(context)
             .load(response.image)
             .diskCacheStrategy(DiskCacheStrategy.ALL)

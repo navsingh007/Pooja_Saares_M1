@@ -24,15 +24,15 @@ class ProductListingVM : ViewModel() {
         isLoading = MutableLiveData<Boolean>()
         userMsg = MutableLiveData<String>()
 
-        productsFilterData = productListingRepo.getProductListingFilterResponse("", false)
+        productsFilterData = productListingRepo.getProductListingFilterResponse("", "", false)
         filterAttributesData = productListingRepo.getFilterAttributesResponse(null, false)
     }
 
-    fun filterProducts(productDetailById: String) {
+    fun filterProducts(pageCount: String, productsByCatId: String) {
         if (UtilsFunctions.isNetworkConnected()) {
             productsFilterData =
-                productListingRepo.getProductListingFilterResponse(productDetailById, true)
-            isLoading.postValue(true)
+                productListingRepo.getProductListingFilterResponse(pageCount, productsByCatId, true)
+//            isLoading.postValue(true)
         }
     }
 

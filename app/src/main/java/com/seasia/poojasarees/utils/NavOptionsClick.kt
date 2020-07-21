@@ -34,8 +34,8 @@ class NavOptionsClick(private val context: BaseActivity) {
             context.resources.getString(R.string.nav_my_fav) -> {
 //                UtilsFunctions.comingSoonDialog(context)
 //                context.startActivity(Intent(context, ProductDetailsActivity::class.java))
-//                context.startActivity(Intent(context, ProductListingFilterActivity::class.java))
-                context.startActivity(Intent(context, WishListActivity::class.java))
+                context.startActivity(Intent(context, ProductListingFilterActivity::class.java))
+//                context.startActivity(Intent(context, WishListActivity::class.java))
             }
             context.resources.getString(R.string.nav_saved_address) -> {
 //                UtilsFunctions.comingSoonDialog(context)
