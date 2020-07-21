@@ -233,6 +233,8 @@ class LoginActivity : BaseActivity() {
 
     private fun showApiMsgObserver() {
         loginVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("Phone number is not registered")) {
                     UtilsFunctions.showToastError(

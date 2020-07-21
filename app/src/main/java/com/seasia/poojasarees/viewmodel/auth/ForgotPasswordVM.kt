@@ -1,12 +1,11 @@
 package com.seasia.poojasarees.viewmodel.auth
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.seasia.poojasarees.common.UtilsFunctions
-import com.seasia.poojasarees.model.response.SignupPhoneNoOut
+import com.seasia.poojasarees.model.response.authentication.SignupPhoneNoOut
 import com.seasia.poojasarees.repository.auth.ForgotPasswordRepo
 
 class ForgotPasswordVM : ViewModel() {

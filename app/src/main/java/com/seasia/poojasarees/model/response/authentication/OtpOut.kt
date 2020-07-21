@@ -1,4 +1,4 @@
-package com.seasia.poojasarees.model.response
+package com.seasia.poojasarees.model.response.authentication
 
 data class OtpOut(
     val message: String? = "",

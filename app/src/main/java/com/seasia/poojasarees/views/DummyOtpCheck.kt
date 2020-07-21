@@ -125,6 +125,8 @@ class DummyOtpCheck : BaseActivity() {
 
     private fun showApiMsgObserver() {
         otpVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("Invalid OTP")) {
                     UtilsFunctions.showToastError(

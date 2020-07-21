@@ -1,4 +1,4 @@
-package com.seasia.poojasarees.model.response
+package com.seasia.poojasarees.model.response.profile
 
 data class ProfileOut(
     val addresses: ArrayList<Addresse>? = arrayListOf(),

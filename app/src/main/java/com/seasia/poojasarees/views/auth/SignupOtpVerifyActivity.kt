@@ -18,17 +18,13 @@ import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityOtpVerificationBinding
 import com.seasia.poojasarees.model.request.SignUpIn
-import com.seasia.poojasarees.model.response.SignUpOut
+import com.seasia.poojasarees.model.response.authentication.SignUpOut
 import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.viewmodel.auth.OtpVM
 import com.seasia.poojasarees.viewmodel.auth.SignupVM
-import com.stfalcon.smsverifycatcher.OnSmsCatchListener
 
-import com.stfalcon.smsverifycatcher.SmsVerifyCatcher
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 
 class SignupOtpVerifyActivity : BaseActivity() {
@@ -195,6 +191,8 @@ class SignupOtpVerifyActivity : BaseActivity() {
 
     private fun showApiMsgObserver() {
         otpVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("Invalid OTP")) {
                     UtilsFunctions.showToastError(

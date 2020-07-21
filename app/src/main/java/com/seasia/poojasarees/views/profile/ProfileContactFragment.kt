@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
@@ -23,11 +21,10 @@ import com.seasia.poojasarees.databinding.FragmentProfileContactBinding
 import com.seasia.poojasarees.model.helper.Profile
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
-import com.seasia.poojasarees.model.response.ProfileOut
+import com.seasia.poojasarees.model.response.profile.ProfileOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.profile.ProfileVM
 import com.tiper.MaterialSpinner
-import kotlinx.android.synthetic.main.activity_change_password.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
@@ -291,6 +288,8 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
 
     private fun showApiMsgObserver() {
         profileVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("SESSION_EXPIRED")) {
                     UtilsFunctions.showToastError(resources.getString(R.string.session_expire))

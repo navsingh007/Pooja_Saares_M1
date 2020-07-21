@@ -89,6 +89,8 @@ class ForgotPasswordActivity : BaseActivity() {
 
     private fun showApiMsgObserver() {
         forgotPassVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("User with this phone already exist.")) {
                     UtilsFunctions.showToastError(

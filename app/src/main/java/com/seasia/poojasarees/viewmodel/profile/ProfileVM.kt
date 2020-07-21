@@ -7,7 +7,6 @@ import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.constants.AppConstants
@@ -15,7 +14,7 @@ import com.seasia.poojasarees.model.helper.Profile
 import com.seasia.poojasarees.model.request.UpdateProfileIn
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
-import com.seasia.poojasarees.model.response.ProfileOut
+import com.seasia.poojasarees.model.response.profile.ProfileOut
 import com.seasia.poojasarees.repository.profile.ProfileRepo
 import com.seasia.poojasarees.utils.PreferenceKeys
 
@@ -285,7 +284,7 @@ class ProfileVM : ViewModel() {
         return allStatesData
     }
 
-    fun allTowns() : LiveData<ArrayList<AllTownsOut>> {
+    fun allTowns(): LiveData<ArrayList<AllTownsOut>> {
         return allTownsData
     }
 

@@ -1,13 +1,9 @@
 package com.seasia.poojasarees.views.profile
 
-import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.tabs.TabLayout
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
@@ -15,9 +11,9 @@ import com.seasia.poojasarees.constants.AppConstants
 import com.seasia.poojasarees.constants.ProfileConstants
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityProfileBinding
-import com.seasia.poojasarees.helper.ProfileHelper
+import com.seasia.poojasarees.helperlocalize.ProfileHelper
 import com.seasia.poojasarees.model.helper.Profile
-import com.seasia.poojasarees.model.response.ProfileOut
+import com.seasia.poojasarees.model.response.profile.ProfileOut
 import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.profile.ProfileVM

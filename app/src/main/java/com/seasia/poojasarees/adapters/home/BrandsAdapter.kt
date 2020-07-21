@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.databinding.RowBrandsBinding
-import com.seasia.poojasarees.model.response.HomeOut
+import com.seasia.poojasarees.model.response.home.HomeOut
 
 
 class BrandsAdapter(

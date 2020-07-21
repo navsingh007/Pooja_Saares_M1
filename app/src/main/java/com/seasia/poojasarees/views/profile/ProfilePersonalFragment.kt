@@ -18,7 +18,7 @@ import com.seasia.poojasarees.constants.ProfileConstants
 import com.seasia.poojasarees.core.BaseFragment
 import com.seasia.poojasarees.databinding.FragmentProfilePersonalBinding
 import com.seasia.poojasarees.model.helper.Profile
-import com.seasia.poojasarees.model.response.ProfileOut
+import com.seasia.poojasarees.model.response.profile.ProfileOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.profile.ProfileVM
 import com.tiper.MaterialSpinner
@@ -283,6 +283,8 @@ class ProfilePersonalFragment : BaseFragment() { //, ProfileActivity.OnGetProfil
 
     private fun showApiMsgObserver() {
         profileVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("SESSION_EXPIRED")) {
                     UtilsFunctions.showToastError(resources.getString(R.string.session_expire))

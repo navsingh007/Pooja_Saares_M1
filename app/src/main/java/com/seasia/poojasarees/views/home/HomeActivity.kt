@@ -34,11 +34,12 @@ import com.seasia.poojasarees.databinding.ActivityHomeBinding
 import com.seasia.poojasarees.databinding.AppBarMainBinding
 import com.seasia.poojasarees.databinding.ContentMainBinding
 import com.seasia.poojasarees.databinding.NavHeaderMainBinding
-import com.seasia.poojasarees.model.response.HomeOut
+import com.seasia.poojasarees.model.response.home.HomeOut
 import com.seasia.poojasarees.utils.*
 import com.seasia.poojasarees.viewmodel.home.HomeVM
 import com.seasia.poojasarees.viewmodel.home.HomeVM.Companion.profileImage
 import com.seasia.poojasarees.views.auth.LoginActivity
+import com.seasia.poojasarees.views.categories.CategoryListActivity
 import com.uniongoods.adapters.PromoBannerAdapter
 import java.io.File
 import java.io.IOException
@@ -119,6 +120,13 @@ class HomeActivity : BaseActivity(), ChoiceCallBack, DialogssInterface,
             networkStateReceiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
+        viewAllCategories()
+    }
+
+    private fun viewAllCategories() {
+        contentBinding.btnAllCategories.setOnClickListener {
+            startActivity(Intent(this, CategoryListActivity::class.java))
+        }
     }
 
     override fun onResume() {
@@ -206,7 +214,10 @@ class HomeActivity : BaseActivity(), ChoiceCallBack, DialogssInterface,
         }
 
         // User NAME and Image
-        val userName = "${MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME)}"
+        val userName =
+            "${MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME)} ${MyApplication.sharedPref.getString(
+                PreferenceKeys.LAST_NAME
+            )}"
 //        +"${MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME)}"
         navBinding.tvNavUserName.text = userName
 
@@ -623,6 +634,8 @@ class HomeActivity : BaseActivity(), ChoiceCallBack, DialogssInterface,
 
     private fun showApiMsgObserver() {
         homeVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 UtilsFunctions.showToastError(msg)
             }

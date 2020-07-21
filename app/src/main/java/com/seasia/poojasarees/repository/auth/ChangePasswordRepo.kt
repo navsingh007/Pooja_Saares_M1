@@ -3,9 +3,7 @@ package com.seasia.poojasarees.repository.auth
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
 import com.seasia.poojasarees.api.ApiClient
-import com.seasia.poojasarees.common.UtilsFunctions
-import com.seasia.poojasarees.model.response.LoginOut
-import com.seasia.poojasarees.model.response.OtpOut
+import com.seasia.poojasarees.model.response.authentication.OtpOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import org.json.JSONObject
 import retrofit2.Call

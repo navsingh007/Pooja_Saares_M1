@@ -1,4 +1,4 @@
-package com.seasia.poojasarees.model.response
+package com.seasia.poojasarees.model.response.home
 
 data class HomeOut(
     val banners: Banners? = Banners(),

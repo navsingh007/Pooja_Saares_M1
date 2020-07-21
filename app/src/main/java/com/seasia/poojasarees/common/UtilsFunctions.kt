@@ -39,6 +39,7 @@ import com.seasia.poojasarees.databinding.CustomToastBinding
 import com.seasia.poojasarees.model.request.AddressIn
 import com.seasia.poojasarees.model.response.AllTownsOut
 import com.seasia.poojasarees.utils.DialogClass
+import com.seasia.poojasarees.utils.LocaleManager
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.views.auth.LoginActivity
 import java.io.File
@@ -518,5 +519,13 @@ object UtilsFunctions {
 
         addresses = geocoder.getFromLocation(latitude, longitude, 1)
         return addresses.get(0).locality ?: ""
+    }
+
+    fun getLanguageStoreId(context: Context): String {
+        return when (LocaleManager.getLanguagePref(context)) {
+            LocaleManager.HINDI -> "2"
+            LocaleManager.ENGLISH -> "1"
+            else -> ""
+        }
     }
 }

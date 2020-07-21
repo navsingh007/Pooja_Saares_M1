@@ -2,13 +2,8 @@ package com.seasia.poojasarees.repository.auth
 
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
-import com.seasia.poojasarees.R
 import com.seasia.poojasarees.api.ApiClient
-import com.seasia.poojasarees.application.MyApplication
-import com.seasia.poojasarees.common.UtilsFunctions
-import com.seasia.poojasarees.model.request.SignUpIn
-import com.seasia.poojasarees.model.response.SignUpOut
-import com.seasia.poojasarees.model.response.SignupPhoneNoOut
+import com.seasia.poojasarees.model.response.authentication.SignupPhoneNoOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import org.json.JSONObject
 import retrofit2.Call

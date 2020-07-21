@@ -3,9 +3,8 @@ package com.seasia.poojasarees.repository.home
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
 import com.seasia.poojasarees.api.ApiClient
-import com.seasia.poojasarees.common.UtilsFunctions
-import com.seasia.poojasarees.model.response.HomeOut
-import com.seasia.poojasarees.model.response.ProfilePicOut
+import com.seasia.poojasarees.model.response.home.HomeOut
+import com.seasia.poojasarees.model.response.profile.ProfilePicOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import org.json.JSONObject
 import retrofit2.Call

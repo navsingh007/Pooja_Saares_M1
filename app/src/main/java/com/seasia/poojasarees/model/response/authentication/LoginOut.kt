@@ -1,6 +1,4 @@
-package com.seasia.poojasarees.model.response
-
-import com.google.gson.annotations.SerializedName
+package com.seasia.poojasarees.model.response.authentication
 
 data class LoginOut(
     val addresses: ArrayList<Addresses>? = arrayListOf(),

@@ -19,7 +19,7 @@ import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.constants.AppConstants
 import com.seasia.poojasarees.databinding.RowGridNewArrivalsBinding
 
-import com.seasia.poojasarees.model.response.HomeOut
+import com.seasia.poojasarees.model.response.home.HomeOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 
 

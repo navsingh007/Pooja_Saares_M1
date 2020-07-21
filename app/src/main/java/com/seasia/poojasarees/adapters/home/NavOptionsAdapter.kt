@@ -80,12 +80,12 @@ class NavOptionsAdapter(
                 icon.setColorFilter(context.resources.getColor(R.color.colorGrey1), PorterDuff.Mode.SRC_IN)
             }
             context.resources.getString(R.string.nav_my_fav) -> {
-                tv.setTextColor(context.resources.getColor(R.color.colorGrey1))
-                icon.setColorFilter(context.resources.getColor(R.color.colorGrey1), PorterDuff.Mode.SRC_IN)
+//                tv.setTextColor(context.resources.getColor(R.color.colorGrey1))
+//                icon.setColorFilter(context.resources.getColor(R.color.colorGrey1), PorterDuff.Mode.SRC_IN)
             }
             context.resources.getString(R.string.nav_saved_address) -> {
-                tv.setTextColor(context.resources.getColor(R.color.colorGrey1))
-                icon.setColorFilter(context.resources.getColor(R.color.colorGrey1), PorterDuff.Mode.SRC_IN)
+//                tv.setTextColor(context.resources.getColor(R.color.colorGrey1))
+//                icon.setColorFilter(context.resources.getColor(R.color.colorGrey1), PorterDuff.Mode.SRC_IN)
             }
             context.getString(R.string.nav_offers) -> {
                 tv.setTextColor(context.resources.getColor(R.color.colorGrey1))

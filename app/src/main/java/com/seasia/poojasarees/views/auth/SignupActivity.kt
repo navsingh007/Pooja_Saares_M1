@@ -16,7 +16,7 @@ import com.seasia.poojasarees.common.FusedLocationClass
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivitySignupBinding
-import com.seasia.poojasarees.helper.SignupHelper
+import com.seasia.poojasarees.helperlocalize.SignupHelper
 import com.seasia.poojasarees.model.helper.Signup
 import com.seasia.poojasarees.model.response.AllTownsOut
 import com.seasia.poojasarees.utils.DialogClass
@@ -142,7 +142,6 @@ class SignupActivity : BaseActivity(), FusedLocationClass.FusedLocationInterface
         signupVM.signupResponse().observe(this, Observer {
             stopProgressDialog()
 
-
             if (it != null) {
 //                finish()
 //                UtilsFunctions.showToastSuccess("Signed up successfully $it")
@@ -216,6 +215,8 @@ class SignupActivity : BaseActivity(), FusedLocationClass.FusedLocationInterface
 
     private fun showApiMsgObserver() {
         signupVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 if (msg.equals("User with this phone already exist.")) {
                     UtilsFunctions.showToastError(
@@ -263,7 +264,7 @@ class SignupActivity : BaseActivity(), FusedLocationClass.FusedLocationInterface
     }
 
     private fun hideKeyboardOnSpinnerClick() {
-        binding.spnTown.setOnFocusChangeListener(object: View.OnFocusChangeListener {
+        binding.spnTown.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(p0: View?, isFocused: Boolean) {
                 if (isFocused) {
                     hideKeyboard(this@SignupActivity)

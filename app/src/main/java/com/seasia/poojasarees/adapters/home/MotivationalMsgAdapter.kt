@@ -1,10 +1,7 @@
 package com.seasia.poojasarees.adapters.home
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Paint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +10,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.seasia.poojasarees.R
-import com.seasia.poojasarees.databinding.RowBrandsBinding
 import com.seasia.poojasarees.databinding.RowMotivationalMsgBinding
-import com.seasia.poojasarees.model.response.HomeOut
+import com.seasia.poojasarees.model.response.home.HomeOut
 
 
 class MotivationalMsgAdapter(

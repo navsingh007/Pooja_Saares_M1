@@ -7,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
-import com.seasia.poojasarees.model.response.HomeOut
-import com.seasia.poojasarees.model.response.ProfilePicOut
+import com.seasia.poojasarees.model.response.home.HomeOut
+import com.seasia.poojasarees.model.response.profile.ProfilePicOut
 import com.seasia.poojasarees.repository.home.HomeRepo
 import com.seasia.poojasarees.utils.PreferenceKeys
 import java.io.File
-import java.util.Base64.getEncoder
 
 class HomeVM : ViewModel() {
     private var homeRepo: HomeRepo

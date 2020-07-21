@@ -23,6 +23,7 @@ data class AddressIn(
         var id: Int = 0,
         var lastname: String = "",
         var postcode: String = "",
+        var district: String = "",
         var region: Region = Region(),
         var region_id: Int = 0,
         var street: ArrayList<String> = arrayListOf(),

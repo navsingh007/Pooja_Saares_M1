@@ -11,14 +11,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-//    private const val BASE_URL = "http://stgm.appsndevs.com/pooja/rest/V1/"   // Milestone - 1
+//    private const val BASE_URL = "http://stgm.appsndevs.com/poojadev/rest/V1/"   // Milestone - 1
+//    const val BASE_URL_IMAGE = "http://stgm.appsndevs.com/poojadev/"   // Image base URL
 
-    private const val BASE_URL = "http://stgm.appsndevs.com/poojadev/rest/V1/"   // milestone-2
-
-    const val BASE_URL_IMAGE = "http://stgm.appsndevs.com/poojadev/"   // Image base URL
+    private const val BASE_URL = "http://stgm.appsndevs.com/pooja/rest/V1/"   // milestone-2
+    const val BASE_URL_IMAGE = "http://stgm.appsndevs.com/pooja/"   // Image base URL
 
     private var mApiInterface: ApiInterface? = null
 
+    @JvmStatic
     fun getApiInterface(): ApiInterface {
         return setApiInterface()!!
     }

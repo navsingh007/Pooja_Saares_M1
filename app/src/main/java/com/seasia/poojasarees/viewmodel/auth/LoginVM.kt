@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.seasia.poojasarees.common.UtilsFunctions
-import com.seasia.poojasarees.model.response.LoginOut
+import com.seasia.poojasarees.model.response.authentication.LoginOut
 import com.seasia.poojasarees.repository.auth.LoginRepo
 
 class LoginVM : ViewModel() {

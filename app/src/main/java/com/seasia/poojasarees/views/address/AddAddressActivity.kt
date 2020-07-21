@@ -10,10 +10,11 @@ import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityAddAddressBinding
-import com.seasia.poojasarees.helper.AddAddressHelper
+import com.seasia.poojasarees.helperlocalize.AddAddressHelper
 import com.seasia.poojasarees.model.helper.Address
 import com.seasia.poojasarees.model.response.AddressOut
 import com.seasia.poojasarees.model.response.AllStatesOut
+import com.seasia.poojasarees.model.response.AllTownsOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.address.AddressVM
 import com.tiper.MaterialSpinner
@@ -22,8 +23,17 @@ class AddAddressActivity : BaseActivity() {
     private lateinit var binding: ActivityAddAddressBinding
     private lateinit var addressVM: AddressVM
     private var address: Address? = null
+
+    // States
     private var allStatesInCountry = ArrayList<String>()
     private var allStatesAdapter: ArrayAdapter<String>? = null
+    private var allStatesWithId: ArrayList<AllStatesOut.AvailableRegion> = ArrayList()
+
+    //Towns
+    private var townList: ArrayList<String> = ArrayList()
+    private var townAdapter: ArrayAdapter<String>? = null
+    private var allTownsWithIdList: ArrayList<AllTownsOut> = ArrayList()
+
 
     override fun getLayoutId(): Int {
         return R.layout.activity_add_address
@@ -42,9 +52,12 @@ class AddAddressActivity : BaseActivity() {
         showApiMsgObserver()
         showUserWarningObserver()
         allStatesObserver()
+        allTownObserver()
         addAddressObserver()
         getAllStatesIfNotPresentLocally()
+
         setStatesAdapter()
+        setTownsAdapter()
     }
 
     private fun setStatesAdapter() {
@@ -56,9 +69,23 @@ class AddAddressActivity : BaseActivity() {
         binding.spnState.adapter = allStatesAdapter
     }
 
+    private fun setTownsAdapter() {
+        townAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.row_spinner,
+            townList
+        )
+
+        binding.spnTown.adapter = townAdapter
+        binding.spnTown.onItemSelectedListener = spinnerItemSelection
+    }
+
     private fun getAllStatesIfNotPresentLocally() {
         binding.spnState.onItemSelectedListener = spinnerItemSelection
-        val states = MyApplication.sharedPref.getString(PreferenceKeys.ALL_STATES, "") ?: ""
+
+        addressVM.getAllStates()
+
+/*        val states = MyApplication.sharedPref.getString(PreferenceKeys.ALL_STATES, "") ?: ""
 
         if (!states.isEmpty()) {
             // All states locally
@@ -74,7 +101,7 @@ class AddAddressActivity : BaseActivity() {
         } else {
             // All states from API
             addressVM.getAllStates()
-        }
+        }*/
     }
 
     val spinnerItemSelection = object : MaterialSpinner.OnItemSelectedListener {
@@ -84,8 +111,36 @@ class AddAddressActivity : BaseActivity() {
             position: Int,
             id: Long
         ) {
-            allStatesInCountry.let {
-                address?.state = it[position]
+            when (parent.id) {
+                binding.spnTown.id -> {
+                    val selectedCity = townAdapter?.getItem(position) ?: ""
+                    var townId = ""
+                    for (townWithId in allTownsWithIdList) {
+                        if (selectedCity.equals(townWithId.value)) {
+                            townId = townWithId.option_id ?: ""
+
+                            UtilsFunctions.showToastSuccess("townId - $townId")
+                        }
+                    }
+                    address?.town = townId
+                }
+
+                binding.spnState.id -> {
+                    allStatesWithId?.let {
+                        address?.state = it[position].id ?: ""
+                        UtilsFunctions.showToastSuccess("stateId - ${it[position].id}")
+                    }
+
+/*                    allStatesInCountry.let {
+//                        address?.state = it[position]
+
+                        val selectedState = allStatesAdapter?.getItem(position) ?: ""
+                        val stateId = ""
+                        for (stateWithId in allStatesWithId) {
+                            if (selectedState.equals(stateWithId.available_regions.))
+                        }
+                    }*/
+                }
             }
         }
 
@@ -110,6 +165,8 @@ class AddAddressActivity : BaseActivity() {
 
     private fun addAddressObserver() {
         addressVM.addOrUpdateAddressResponse().observe(this, Observer { address ->
+            stopProgressDialog()
+
             if (address != null) {
                 // Update addresses locally
                 MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, address.addresses)
@@ -119,6 +176,8 @@ class AddAddressActivity : BaseActivity() {
 
     private fun showApiMsgObserver() {
         addressVM.showApiMsg().observe(this, Observer { msg ->
+            stopProgressDialog()
+
             if (msg != null) {
                 UtilsFunctions.showToastError(msg)
             }
@@ -136,9 +195,16 @@ class AddAddressActivity : BaseActivity() {
     private fun allStatesObserver() {
         addressVM.getAllStatesResponse().observe(this, Observer {
             if (!it.isEmpty() && it[0].available_regions != null) {
+
+                // Save all states locally
+                MyApplication.sharedPref.save(PreferenceKeys.ALL_STATES, it)
+
                 val allStates = it[0].available_regions
 
                 if (allStates != null) {
+                    // All states with ID
+                    allStatesWithId = allStates
+
                     val stateNames = ArrayList<String>()
                     for (state in allStates) {
                         stateNames.add(state.name!!)
@@ -146,6 +212,30 @@ class AddAddressActivity : BaseActivity() {
                     allStatesInCountry.clear()
                     allStatesInCountry.addAll(stateNames)
                     allStatesAdapter?.notifyDataSetChanged()
+                }
+            }
+        })
+    }
+
+    private fun allTownObserver() {
+        addressVM.allTowns().observe(this, Observer { allTowns ->
+            if (allTowns != null) {
+                if (allTowns.size > 0) {
+                    MyApplication.sharedPref.save(PreferenceKeys.ALL_TOWNS, allTowns)
+
+                    // Town with ID list
+                    allTownsWithIdList.clear()
+                    allTownsWithIdList.addAll(allTowns)
+
+                    val towns = ArrayList<String>()
+                    for (town in allTowns) {
+                        towns.add(town.value ?: "")
+                    }
+
+                    // Clear all previous data and add new
+                    townList.clear()
+                    townList.addAll(towns)
+                    townAdapter?.notifyDataSetChanged()
                 }
             }
         })

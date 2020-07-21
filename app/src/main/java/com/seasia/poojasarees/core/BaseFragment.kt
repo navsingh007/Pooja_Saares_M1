@@ -32,7 +32,7 @@ abstract class BaseFragment : Fragment() {
     var viewDataBinding: ViewDataBinding? = null
     private var progressDialog: Dialog? = null
     var permCallback: PermissionCallback? = null
-//    var sharedPref: PrefStore? = null
+    //    var sharedPref: PrefStore? = null
     var mContext: Context? = null
 
     lateinit var baseActivity : BaseActivity

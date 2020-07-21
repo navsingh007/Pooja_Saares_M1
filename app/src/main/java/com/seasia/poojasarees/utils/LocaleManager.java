@@ -9,12 +9,6 @@ import android.preference.PreferenceManager;
 
 import androidx.annotation.StringDef;
 
-import com.seasia.poojasarees.application.MyApplication;
-import com.seasia.poojasarees.model.response.ProfileOut;
-import com.seasia.poojasarees.views.profile.ProfileActivity;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;

@@ -1,4 +1,4 @@
-package com.seasia.poojasarees.helper
+package com.seasia.poojasarees.helperlocalize
 
 import android.content.Context
 import com.seasia.poojasarees.R

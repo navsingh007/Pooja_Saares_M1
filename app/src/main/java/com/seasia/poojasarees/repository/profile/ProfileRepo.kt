@@ -1,15 +1,11 @@
 package com.seasia.poojasarees.repository.profile
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.seasia.poojasarees.R
 import com.seasia.poojasarees.api.ApiClient
-import com.seasia.poojasarees.application.MyApplication
-import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.model.request.UpdateProfileIn
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
-import com.seasia.poojasarees.model.response.ProfileOut
+import com.seasia.poojasarees.model.response.profile.ProfileOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import org.json.JSONObject
 import retrofit2.Call

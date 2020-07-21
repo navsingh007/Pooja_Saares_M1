@@ -5,8 +5,8 @@ import com.seasia.poojasarees.api.ApiClient
 import com.seasia.poojasarees.application.MyApplication
 
 object AppConstants {
-    //val IMG_BASE_URL = "http://stgm.appsndevs.com/pooja/pub/media/catalog/product"
     val IMG_BASE_URL = "${ApiClient.BASE_URL_IMAGE}pub/media/catalog/product"
+    val IMG_CATEGORY_BASE_URL = "${ApiClient.BASE_URL_IMAGE}pub/media/catalog/category"
     val GROUP_ID = "3"
     val WEBSITE_ID = "1"
     val DISABLE_AUTO_GROUP_CHANGE = "0"

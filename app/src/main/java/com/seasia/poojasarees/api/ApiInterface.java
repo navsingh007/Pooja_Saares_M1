@@ -5,25 +5,39 @@ import com.seasia.poojasarees.model.request.AddressIn;
 import com.seasia.poojasarees.model.request.AdminIn;
 import com.seasia.poojasarees.model.request.SignUpIn;
 import com.seasia.poojasarees.model.request.UpdateProfileIn;
+import com.seasia.poojasarees.model.request.cart.AddToCartIn;
 import com.seasia.poojasarees.model.response.AddressOut;
 import com.seasia.poojasarees.model.response.AllStatesOut;
 import com.seasia.poojasarees.model.response.AllTownsOut;
-import com.seasia.poojasarees.model.response.HomeOut;
-import com.seasia.poojasarees.model.response.LoginOut;
-import com.seasia.poojasarees.model.response.OtpOut;
-import com.seasia.poojasarees.model.response.ProfileOut;
-import com.seasia.poojasarees.model.response.ProfilePicOut;
-import com.seasia.poojasarees.model.response.SignUpOut;
-import com.seasia.poojasarees.model.response.SignupPhoneNoOut;
+import com.seasia.poojasarees.model.response.address.AddressByIdOut;
+import com.seasia.poojasarees.model.response.cart.AddToCartOut;
+import com.seasia.poojasarees.model.response.cart.CustomerByCartIdOut;
+import com.seasia.poojasarees.model.response.category.CategoryListOut;
+import com.seasia.poojasarees.model.response.home.HomeOut;
+import com.seasia.poojasarees.model.response.authentication.LoginOut;
+import com.seasia.poojasarees.model.response.authentication.OtpOut;
+import com.seasia.poojasarees.model.response.products.ProductDetailsOut;
+import com.seasia.poojasarees.model.response.products.ProductFilterAttributes;
+import com.seasia.poojasarees.model.response.products.ProductsByCategoryIdOut;
+import com.seasia.poojasarees.model.response.profile.ProfileOut;
+import com.seasia.poojasarees.model.response.profile.ProfilePicOut;
+import com.seasia.poojasarees.model.response.authentication.SignUpOut;
+import com.seasia.poojasarees.model.response.authentication.SignupPhoneNoOut;
+import com.seasia.poojasarees.model.response.wishlist.AllWishlistProductsOut;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -73,10 +87,83 @@ public interface ApiInterface {
     Call<SignupPhoneNoOut> uniquePhoneNoCheck(@Body JsonObject phoneNoIn);
 
 
+    // ****************** Milestone - 2 *********************//
+
     // Address
     @PUT("customers/{id}")
     Call<AddressOut> addOrUpdateAddress(@Path("id") String customerId, @Body AddressIn addressIn);
 
+    @GET("customers/addresses/{id}")
+    Call<AddressByIdOut> getAddressById(@Path("id") String addressId);
+
+    @DELETE("addresses/{id}")
+    Call<Boolean> deleteAddressById(@Path("id") String addressId);
+
+
+
     @GET("cityOptions")
     Call<ArrayList<AllTownsOut>> getAllTowns();
+
+    // Category Listing
+    @GET("categories")
+    Call<CategoryListOut> getCategoryListing();
+
+    // Product details by ID
+    @GET("products?searchCriteria[filterGroups][0][filters][0][field]=entity_id&" +
+            "searchCriteria[filterGroups][0][filters][0][condition_type]=eq&")
+    Call<ProductDetailsOut> getProductById(@Query("searchCriteria[filterGroups][0][filters][0][value]") String productId);
+
+
+    // Get products by category ID
+//    @GET("products?searchCriteria[filterGroups][0][filters][0][field]=category_id& " +
+//            "searchCriteria[filterGroups][0][filters][0][value]=4&" +
+//            " searchCriteria[filterGroups][0][filters][0][conditionType]=eq&" +
+//            "searchCriteria[filterGroups][0][filters][1][field]=visibility& " +
+//            "searchCriteria[filterGroups][0][filters][1][value]=4& " +
+//            "searchCriteria[filterGroups][0][filters][0][conditionType]=eq&" +
+//            "searchCriteria[sortOrders][0][field]=created_at& " +
+//            "searchCriteria[sortOrders][0][direction]=DESC& " +
+//            "searchCriteria[pageSize]=10& searchCriteria[currentPage]=1")
+//    Call<ProductsByCategoryIdOut> getProductsByCategoryId();
+
+
+    @GET("products")
+    Call<ProductsByCategoryIdOut> getProductsByCategoryId(@Query("searchCriteria[filterGroups][0][filters][0][field]") String categoryId,
+                                                          @Query("searchCriteria[filterGroups][0][filters][0][value]") String catIdValue,
+                                                          @Query("searchCriteria[filterGroups][0][filters][0][conditionType]") String catIdCondition,
+                                                          @Query("searchCriteria[filterGroups][0][filters][1][field]") String visibility,
+                                                          @Query("searchCriteria[filterGroups][0][filters][1][value]") String visibilityValue,
+                                                          @Query("searchCriteria[filterGroups][0][filters][1][conditionType]") String visibilityCondition,
+                                                          @Query("searchCriteria[sortOrders][0][field]") String createdAt,
+                                                          @Query("searchCriteria[sortOrders][0][direction]") String sortType,
+                                                          @Query("searchCriteria[pageSize]") String pageSize,
+                                                          @Query("searchCriteria[currentPage]") String currentPage
+    );
+
+    @POST("getFilterAttributes")
+    Call<ProductFilterAttributes> getFiltersAttributes(@Body JsonObject filterAttributesIn);
+
+
+    // WISHLIST management
+
+    @POST("addWishlistItems")
+    Call<Boolean> addProductToWishlist(@Body JsonObject addWishlistIn);
+
+    @POST("deleteWishlistItem")
+    Call<Boolean> deleteProductFromWishlist(@Body JsonObject deleteWishlistIn);
+
+    @POST("wishlistItems")
+    Call<ArrayList<AllWishlistProductsOut>> getWishlistItems(@Body JsonObject wishlistItemsIn);
+
+
+    // CART management
+
+    @POST("carts/mine")
+    Call<Integer> createCustCart();
+
+    @POST("carts/mine/items")
+    Call<AddToCartOut> addItemsToCart(@Body AddToCartIn addToCartIn);
+
+    @GET("carts/{id}")
+    Call<CustomerByCartIdOut> getCustCartById(@Path("id") String cartId);
 }
