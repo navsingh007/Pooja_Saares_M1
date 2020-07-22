@@ -1,4 +1,5 @@
 package com.seasia.poojasarees.model.response.authentication
+import com.seasia.poojasarees.model.Addresses
 
 data class LoginOut(
     val addresses: ArrayList<Addresses>? = arrayListOf(),
@@ -22,23 +23,6 @@ data class LoginOut(
     val website_id: Int? = 0
 ) {
 
-    data class Addresses(
-        val city: String? = "",
-        val country_id: String? = "",
-        val customer_id: String? = "",
-        val default_billing: Boolean? = false,
-        val default_shipping: Boolean? = false,
-        val firstname: String? = "",
-        val id: String? = "",
-        val lastname: String? = "",
-        val postcode: String? = "",
-        val prefix: String? = "",
-        val region: Region? = Region(),
-        val region_id: String? = "",
-        val street: ArrayList<String>? = arrayListOf(),
-        val telephone: String? = ""
-    )
-
     data class CmsLinks(
         val about_us: String? = "",
         val privacy_policy: String? = "",
@@ -52,10 +36,38 @@ data class LoginOut(
 
     class ExtensionAttributes(
     )
+}
 
-    data class Region(
+/*
+data class Addresses(
+    val city: String? = "",
+    val country_id: String? = "",
+    val customer_id: String? = "",
+    val default_billing: Boolean? = false,
+    val default_shipping: Boolean? = false,
+    val custom_attributes: CustomAttributes? = CustomAttributes(),
+    val firstname: String? = "",
+    val id: String? = "",
+    val lastname: String? = "",
+    val postcode: String? = "",
+    val prefix: String? = "",
+    val region: LoginOut.Region? = LoginOut.Region(),
+    val region_id: String? = "",
+    val street: ArrayList<String>? = arrayListOf(),
+    val telephone: String? = ""
+)
+
+data class Region(
         val region: String? = "",
         val region_code: String? = "",
         val region_id: Int? = 0
     )
-}
+
+data class CustomAttributes(
+    var district: District = District()
+)
+
+data class District(
+    var attribute_code: String = "",
+    var value: String = ""
+)*/

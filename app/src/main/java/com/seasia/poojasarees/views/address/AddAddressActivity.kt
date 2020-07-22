@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.gson.reflect.TypeToken
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
@@ -12,7 +11,8 @@ import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityAddAddressBinding
 import com.seasia.poojasarees.helperlocalize.AddAddressHelper
 import com.seasia.poojasarees.model.helper.Address
-import com.seasia.poojasarees.model.response.AddressOut
+import com.seasia.poojasarees.model.AddressOut
+import com.seasia.poojasarees.model.Addresses
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
 import com.seasia.poojasarees.utils.PreferenceKeys
@@ -150,7 +150,7 @@ class AddAddressActivity : BaseActivity() {
     private fun getExtras() {
         val editAddress = intent.getSerializableExtra("editAddress")
         if (editAddress != null) {
-            val editableAddress = editAddress as AddressOut.Addresse
+            val editableAddress = editAddress as Addresses
 
             val city = editableAddress.city
             val pincode = editableAddress.postcode
@@ -170,6 +170,8 @@ class AddAddressActivity : BaseActivity() {
             if (address != null) {
                 // Update addresses locally
                 MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, address.addresses)
+                UtilsFunctions.showToastSuccess(resources.getString(R.string.address_added_success))
+                finish()
             }
         })
     }

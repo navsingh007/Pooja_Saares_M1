@@ -1,15 +1,15 @@
 package com.seasia.poojasarees.api;
 
 import com.google.gson.JsonObject;
-import com.seasia.poojasarees.model.request.AddressIn;
+import com.seasia.poojasarees.model.AddressIn;
+import com.seasia.poojasarees.model.Addresses;
 import com.seasia.poojasarees.model.request.AdminIn;
 import com.seasia.poojasarees.model.request.SignUpIn;
 import com.seasia.poojasarees.model.request.UpdateProfileIn;
 import com.seasia.poojasarees.model.request.cart.AddToCartIn;
-import com.seasia.poojasarees.model.response.AddressOut;
+import com.seasia.poojasarees.model.AddressOut;
 import com.seasia.poojasarees.model.response.AllStatesOut;
 import com.seasia.poojasarees.model.response.AllTownsOut;
-import com.seasia.poojasarees.model.response.address.AddressByIdOut;
 import com.seasia.poojasarees.model.response.cart.AddToCartOut;
 import com.seasia.poojasarees.model.response.cart.CustomerByCartIdOut;
 import com.seasia.poojasarees.model.response.category.CategoryListOut;
@@ -26,13 +26,10 @@ import com.seasia.poojasarees.model.response.authentication.SignupPhoneNoOut;
 import com.seasia.poojasarees.model.response.wishlist.AllWishlistProductsOut;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -94,7 +91,7 @@ public interface ApiInterface {
     Call<AddressOut> addOrUpdateAddress(@Path("id") String customerId, @Body AddressIn addressIn);
 
     @GET("customers/addresses/{id}")
-    Call<AddressByIdOut> getAddressById(@Path("id") String addressId);
+    Call<Addresses> getAddressById(@Path("id") String addressId);
 
     @DELETE("addresses/{id}")
     Call<Boolean> deleteAddressById(@Path("id") String addressId);

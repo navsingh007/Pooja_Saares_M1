@@ -10,12 +10,10 @@ import com.google.gson.reflect.TypeToken
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.constants.AppConstants
+import com.seasia.poojasarees.model.*
 import com.seasia.poojasarees.model.helper.Address
-import com.seasia.poojasarees.model.request.AddressIn
-import com.seasia.poojasarees.model.response.AddressOut
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
-import com.seasia.poojasarees.model.response.address.AddressByIdOut
 import com.seasia.poojasarees.repository.address.AddressRepo
 import com.seasia.poojasarees.utils.PreferenceKeys
 
@@ -23,7 +21,7 @@ class AddressVM : ViewModel() {
     private var addressRepo: AddressRepo
     private var addOrUpdateAddressData: MutableLiveData<AddressOut>
     private var deleteAddressData: MutableLiveData<Boolean>
-    private var getAddressByIdData: MutableLiveData<AddressByIdOut>
+    private var getAddressByIdData: MutableLiveData<Addresses>
     private var allStatesData: MutableLiveData<ArrayList<AllStatesOut>>
     private var allTownsData: MutableLiveData<ArrayList<AllTownsOut>>
     private val isLoading: MutableLiveData<Boolean>
@@ -33,7 +31,7 @@ class AddressVM : ViewModel() {
         addressRepo = AddressRepo()
         addOrUpdateAddressData = MutableLiveData<AddressOut>()
         deleteAddressData = MutableLiveData<Boolean>()
-        getAddressByIdData = MutableLiveData<AddressByIdOut>()
+        getAddressByIdData = MutableLiveData<Addresses>()
         allStatesData = MutableLiveData<ArrayList<AllStatesOut>>()
         allTownsData = MutableLiveData<ArrayList<AllTownsOut>>()
         isLoading = MutableLiveData<Boolean>()
@@ -53,14 +51,14 @@ class AddressVM : ViewModel() {
 
             val shop = model.shopName
             val street = model.street
-            val town = model.town
+            val townId = model.town
             val district = model.district
             val stateId = model.state
             val pincode = model.pincode
 
-            val userInputs = arrayOf(shop, street, town, district, pincode)
+            val userInputs = arrayOf(shop, street, district, pincode)
             val msg =
-                arrayOf(ENTER_SHOP_NAME, ENTER_STREET, ENTER_TOWN, ENTER_DISTRICT, ENTER_PIN_CODE)
+                arrayOf(ENTER_SHOP_NAME, ENTER_STREET, ENTER_DISTRICT, ENTER_PIN_CODE)
 
             for (i in 0 until userInputs.size) {
                 if (TextUtils.isEmpty(userInputs[i])) {
@@ -69,8 +67,8 @@ class AddressVM : ViewModel() {
                 }
             }
 
-            val userMinInputs = arrayOf(shop, street, town, district)
-            val minMsg = arrayOf(MIN_SHOP, MIN_STREET, MIN_TOWN, MIN_DISTRICT)
+            val userMinInputs = arrayOf(shop, street, district)
+            val minMsg = arrayOf(MIN_SHOP, MIN_STREET, MIN_DISTRICT)
 
             for (i in 0 until userMinInputs.size) {
                 if (userMinInputs[i].length < 3) {
@@ -143,38 +141,42 @@ class AddressVM : ViewModel() {
                     }
                 }
 
-                val region = AddressIn.Region(
+                val region = Region(
                     region = regionName,
                     region_code = regionCode,
                     region_id = regionId
                 )
 
+                // All customer addresses + New address
                 // Customer all saved addresses
                 val savedAddress =
                     MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
                 if (!savedAddress.isEmpty()) {
-                    val myType = object : TypeToken<ArrayList<AddressOut.Addresse>>() {}.type
-                    val allAddresses = MyApplication.gson.fromJson<ArrayList<AddressIn.Addresse>>(
+                    val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
+                    val allAddresses = MyApplication.gson.fromJson<ArrayList<Addresses>>(
                         savedAddress,
                         myType
                     )
-
                     addressIn.customer.addresses.addAll(allAddresses)
                 }
 
-                val newAddress = AddressIn.Addresse(
-                    city = town,
+                //  Customer new Address
+                val newAddress = Addresses(
+                    city = townId,
                     country_id = "IN",
-                    customer_id = customerId,
+                    customer_id = "$customerId",
                     firstname = MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME, "")
                         ?: "",
-                    id = 0,
+                    id = "0",
                     lastname = MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME, "")
                         ?: "",
                     postcode = pincode,
-                    district = district,
+                    custom_attributes = CustomAttributes(
+                        District(attribute_code = "district", value = townId)
+                    ),
+//                    district = district,
                     region = region,
-                    region_id = regionId,
+                    region_id = "$regionId",
                     street = arrayListOf(street),
                     telephone = MyApplication.sharedPref.getString(PreferenceKeys.PHONE_NO, "")
                         ?: ""
@@ -219,7 +221,7 @@ class AddressVM : ViewModel() {
         return deleteAddressData
     }
 
-    fun getAddressByIdResponse(): LiveData<AddressByIdOut> {
+    fun getAddressByIdResponse(): LiveData<Addresses> {
         return getAddressByIdData
     }
 

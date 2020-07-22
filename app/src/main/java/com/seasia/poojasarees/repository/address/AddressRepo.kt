@@ -2,11 +2,11 @@ package com.seasia.poojasarees.repository.address
 
 import androidx.lifecycle.MutableLiveData
 import com.seasia.poojasarees.api.ApiClient
-import com.seasia.poojasarees.model.request.AddressIn
-import com.seasia.poojasarees.model.response.AddressOut
+import com.seasia.poojasarees.model.AddressIn
+import com.seasia.poojasarees.model.AddressOut
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
-import com.seasia.poojasarees.model.response.address.AddressByIdOut
+import com.seasia.poojasarees.model.Addresses
 import com.seasia.poojasarees.utils.PreferenceKeys
 import org.json.JSONObject
 import retrofit2.Call
@@ -17,7 +17,7 @@ class AddressRepo {
 
     var addOrUpdateAddressData: MutableLiveData<AddressOut>? = null
     var deleteAddressData: MutableLiveData<Boolean>? = null
-    var getAddressByIdData: MutableLiveData<AddressByIdOut>? = null
+    var getAddressByIdData: MutableLiveData<Addresses>? = null
     var allStatesData: MutableLiveData<ArrayList<AllStatesOut>>? = null
     var allTowns: MutableLiveData<ArrayList<AllTownsOut>>? = null
     val sessionExpire: MutableLiveData<Boolean>
@@ -128,20 +128,20 @@ class AddressRepo {
     fun getAddressByID(
         addressId: String,
         hit: Boolean
-    ): MutableLiveData<AddressByIdOut> {
+    ): MutableLiveData<Addresses> {
         if (hit) {
             PreferenceKeys.TOKEN = "0"
             val service = ApiClient.getApiInterface()
             val call = service.getAddressById(addressId)
-            call.enqueue(object : retrofit2.Callback<AddressByIdOut> {
-                override fun onFailure(call: retrofit2.Call<AddressByIdOut>, t: Throwable) {
+            call.enqueue(object : retrofit2.Callback<Addresses> {
+                override fun onFailure(call: retrofit2.Call<Addresses>, t: Throwable) {
                     apiMsg.postValue(t.message!!)
                     getAddressByIdData!!.value = null
                 }
 
                 override fun onResponse(
-                    call: retrofit2.Call<AddressByIdOut>,
-                    response: retrofit2.Response<AddressByIdOut>
+                    call: retrofit2.Call<Addresses>,
+                    response: retrofit2.Response<Addresses>
                 ) {
                     when (response.code()) {
                         200 -> {

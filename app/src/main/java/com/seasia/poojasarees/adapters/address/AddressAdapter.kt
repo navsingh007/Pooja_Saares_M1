@@ -5,18 +5,18 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.databinding.RowAddressBinding
-import com.seasia.poojasarees.model.response.AddressOut
+import com.seasia.poojasarees.model.AddressOut
+import com.seasia.poojasarees.model.Addresses
 import com.seasia.poojasarees.views.address.AddAddressActivity
 
 class AddressAdapter(
     val context: Context,
-    val addressList: ArrayList<AddressOut.Addresse>
+    val addressList: ArrayList<Addresses>
 ) : RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
 
     @NonNull
@@ -59,7 +59,7 @@ class AddressAdapter(
         v: View, val viewType: Int,
         val binding: RowAddressBinding,
         context: Context,
-        addressList: ArrayList<AddressOut.Addresse>
+        addressList: ArrayList<Addresses>
     ) : RecyclerView.ViewHolder(v)
 
 }

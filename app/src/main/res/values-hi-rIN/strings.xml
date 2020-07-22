@@ -208,4 +208,5 @@
     <string name="address_min_district">Please enter valid District</string>
     <string name="address_min_pincode">Please enter valid Pincode</string>
     <string name="address_invalid_pincode">Pin code is Invalid</string>
+    <string name="address_added_success">Address added successfully</string>
 </resources>

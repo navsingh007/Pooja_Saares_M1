@@ -36,7 +36,8 @@ import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.constants.AppConstants
 import com.seasia.poojasarees.databinding.CustomToastBinding
-import com.seasia.poojasarees.model.request.AddressIn
+import com.seasia.poojasarees.model.AddressIn
+import com.seasia.poojasarees.model.Addresses
 import com.seasia.poojasarees.model.response.AllTownsOut
 import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.utils.LocaleManager
@@ -470,9 +471,9 @@ object UtilsFunctions {
         return filter
     }
 
-    fun getUserAddress(userAddressJson: String): ArrayList<AddressIn.Addresse> {
-        val myType = object : TypeToken<ArrayList<AddressIn.Addresse>>() {}.type
-        return MyApplication.gson.fromJson<ArrayList<AddressIn.Addresse>>(userAddressJson, myType)
+    fun getUserAddress(userAddressJson: String): ArrayList<Addresses> {
+        val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
+        return MyApplication.gson.fromJson<ArrayList<Addresses>>(userAddressJson, myType)
     }
 
     fun getTowns(allTownsJson: String): ArrayList<AllTownsOut> {

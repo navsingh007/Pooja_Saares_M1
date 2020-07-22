@@ -144,6 +144,7 @@ class LoginActivity : BaseActivity() {
                 val userAddress = it.addresses
                 if (userAddress != null && !userAddress.isEmpty()) {
                     // SAVE all User addresses
+
                     MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, userAddress)
 
                     for (address in userAddress) {

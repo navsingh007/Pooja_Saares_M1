@@ -1,6 +1,6 @@
 package com.seasia.poojasarees.model.request
 
-data class AddressIn(
+data class AddressInOld(
     var customer: Customer = Customer()
 ) {
 

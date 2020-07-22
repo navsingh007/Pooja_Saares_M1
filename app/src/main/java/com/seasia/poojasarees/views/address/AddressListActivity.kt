@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.adapters.address.AddressAdapter
@@ -14,14 +13,15 @@ import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityAddressListBinding
-import com.seasia.poojasarees.model.response.AddressOut
+import com.seasia.poojasarees.model.AddressOut
+import com.seasia.poojasarees.model.Addresses
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.address.AddressVM
 
 class AddressListActivity : BaseActivity() {
     private lateinit var binding: ActivityAddressListBinding
     private lateinit var addressVM: AddressVM
-    private val addressList = ArrayList<AddressOut.Addresse>()
+    private val addressList = ArrayList<Addresses>()
     private var addressAdapter: AddressAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -58,8 +58,8 @@ class AddressListActivity : BaseActivity() {
             MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
 
         if (!userAddress.isEmpty()) {
-            val myType = object : TypeToken<ArrayList<AddressOut.Addresse>>() {}.type
-            val allAddresses = MyApplication.gson.fromJson<ArrayList<AddressOut.Addresse>>(userAddress, myType)
+            val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
+            val allAddresses = MyApplication.gson.fromJson<ArrayList<Addresses>>(userAddress, myType)
 
             addressList.clear()
             addressList.addAll(allAddresses)
