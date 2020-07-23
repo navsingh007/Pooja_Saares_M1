@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.adapters.address.AddressAdapter
 import com.seasia.poojasarees.application.MyApplication
+import com.seasia.poojasarees.callbacks.OnAddressDelete
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityAddressListBinding
@@ -23,6 +24,9 @@ class AddressListActivity : BaseActivity() {
     private lateinit var addressVM: AddressVM
     private val addressList = ArrayList<Addresses>()
     private var addressAdapter: AddressAdapter? = null
+    private val DELETE_ADDRESS = "delete"
+    private val DEFAULT_ADDRESS = "default"
+    private var deleteOrDefaultFlag = ""
 
     override fun getLayoutId(): Int {
         return R.layout.activity_address_list
@@ -40,6 +44,7 @@ class AddressListActivity : BaseActivity() {
         loadingObserver()
         showApiMsgObserver()
         showUserWarningObserver()
+        deleteOrDefaultAnAddressObserver()
 
 //        getAddressByIdObserver()
 //        deleteAddressByIdObserver()
@@ -59,7 +64,8 @@ class AddressListActivity : BaseActivity() {
 
         if (!userAddress.isEmpty()) {
             val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
-            val allAddresses = MyApplication.gson.fromJson<ArrayList<Addresses>>(userAddress, myType)
+            val allAddresses =
+                MyApplication.gson.fromJson<ArrayList<Addresses>>(userAddress, myType)
 
             addressList.clear()
             addressList.addAll(allAddresses)
@@ -74,11 +80,43 @@ class AddressListActivity : BaseActivity() {
     }
 
     private fun setAddressAdapter() {
-        addressAdapter = AddressAdapter(this, addressList)
+        addressAdapter = AddressAdapter(this, addressList, deleteAddressListener)
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         binding.rvAddresses.layoutManager = linearLayoutManager
         binding.rvAddresses.adapter = addressAdapter
+    }
+
+    private val deleteAddressListener = object : OnAddressDelete {
+        override fun onDeleteAddress(addressId: String) {
+
+            deleteOrDefaultFlag = DELETE_ADDRESS
+            addressVM.deleteAddressById(addressId)
+
+/*             val userAddress =
+                MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
+
+           if (!userAddress.isEmpty()) {
+                val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
+                val allAddresses =
+                    MyApplication.gson.fromJson<ArrayList<Addresses>>(userAddress, myType)
+
+                for (address in allAddresses) {
+                    if (address.id.equals(addressId)) {
+                        allAddresses.remove(address)
+                        // Update Address list in Shared pref
+                        MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, allAddresses)
+                        break
+                    }
+                }
+                updateAddressList()
+            }*/
+        }
+
+        override fun onDefaultAddress(addressId: String) {
+            deleteOrDefaultFlag = DEFAULT_ADDRESS
+            addressVM.setAnAddressAsDefaultByCommonModel(addressId)
+        }
     }
 
     private fun loadingObserver() {
@@ -135,5 +173,29 @@ class AddressListActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun deleteOrDefaultAnAddressObserver() {
+        addressVM.deleteOrDefaultAnAddressResponse().observe(this, Observer { address ->
+            stopProgressDialog()
+
+            if (address != null) {
+                // Update addresses List locally
+                MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, address.addresses)
+
+                if (deleteOrDefaultFlag.equals(DELETE_ADDRESS)) {
+                    UtilsFunctions.showToastSuccess(resources.getString(R.string.address_deleted_success))
+                } else if (deleteOrDefaultFlag.equals(DEFAULT_ADDRESS)) {
+                    UtilsFunctions.showToastSuccess(resources.getString(R.string.address_default_set_success))
+                }
+
+                updateAddressList()
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateAddressList()
     }
 }

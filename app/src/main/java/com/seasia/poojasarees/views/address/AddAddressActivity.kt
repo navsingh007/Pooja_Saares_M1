@@ -49,6 +49,7 @@ class AddAddressActivity : BaseActivity() {
 
         getExtras()
 //        binding.btnCancel.setOnClickListener { finish() }
+        loadingObserver()
         showApiMsgObserver()
         showUserWarningObserver()
         allStatesObserver()
@@ -122,12 +123,15 @@ class AddAddressActivity : BaseActivity() {
                             UtilsFunctions.showToastSuccess("townId - $townId")
                         }
                     }
-                    address?.town = townId
+                    address?.town = selectedCity
+                    address?.townId = townId
                 }
 
                 binding.spnState.id -> {
                     allStatesWithId?.let {
-                        address?.state = it[position].id ?: ""
+                        address?.stateId = it[position].id ?: ""
+                        address?.region = it[position].name ?: ""
+                        address?.regionCode = it[position].code ?: ""
                         UtilsFunctions.showToastSuccess("stateId - ${it[position].id}")
                     }
 
@@ -157,9 +161,14 @@ class AddAddressActivity : BaseActivity() {
             val street = editableAddress.street?.get(0) ?: ""
             val state = editableAddress.region?.region ?: ""
 
+            address?.shopName = MyApplication.sharedPref.getString(PreferenceKeys.SHOP_NAME, "") ?: ""
             address?.town = city ?: ""
             address?.pincode = pincode ?: ""
             address?.street = street
+
+            // Set Updating/editable address ID and isEditable = true
+            address?.isEditable = true
+            address?.addressIdToEdit = editAddress.id
         }
     }
 
@@ -172,6 +181,17 @@ class AddAddressActivity : BaseActivity() {
                 MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, address.addresses)
                 UtilsFunctions.showToastSuccess(resources.getString(R.string.address_added_success))
                 finish()
+            }
+        })
+    }
+
+
+    private fun loadingObserver() {
+        addressVM.isLoading().observe(this, Observer { loading ->
+            if (loading) {
+                startProgressDialog()
+            } else {
+                stopProgressDialog()
             }
         })
     }

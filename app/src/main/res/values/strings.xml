@@ -210,4 +210,7 @@
     <string name="address_min_pincode">Please enter valid Pincode</string>
     <string name="address_invalid_pincode">Pin code is Invalid</string>
     <string name="address_added_success">Address added successfully</string>
+    <string name="address_updated_success">Address updated successfully</string>
+    <string name="address_deleted_success">Address deleted successfully</string>
+    <string name="address_default_set_success">Address set as default successfully</string>
 </resources>

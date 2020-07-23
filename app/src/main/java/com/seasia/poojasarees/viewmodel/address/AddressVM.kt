@@ -14,12 +14,14 @@ import com.seasia.poojasarees.model.*
 import com.seasia.poojasarees.model.helper.Address
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
+import com.seasia.poojasarees.model.response.authentication.LoginOut
 import com.seasia.poojasarees.repository.address.AddressRepo
 import com.seasia.poojasarees.utils.PreferenceKeys
 
 class AddressVM : ViewModel() {
     private var addressRepo: AddressRepo
     private var addOrUpdateAddressData: MutableLiveData<AddressOut>
+    private var deleteOrDefaultAddressData: MutableLiveData<AddressOut>
     private var deleteAddressData: MutableLiveData<Boolean>
     private var getAddressByIdData: MutableLiveData<Addresses>
     private var allStatesData: MutableLiveData<ArrayList<AllStatesOut>>
@@ -30,6 +32,7 @@ class AddressVM : ViewModel() {
     init {
         addressRepo = AddressRepo()
         addOrUpdateAddressData = MutableLiveData<AddressOut>()
+        deleteOrDefaultAddressData = MutableLiveData<AddressOut>()
         deleteAddressData = MutableLiveData<Boolean>()
         getAddressByIdData = MutableLiveData<Addresses>()
         allStatesData = MutableLiveData<ArrayList<AllStatesOut>>()
@@ -43,6 +46,10 @@ class AddressVM : ViewModel() {
         addressRepo.deleteAddressById("", false)
         addressRepo.getAddressByID("", false)
         allTownsData = addressRepo.getAllTowns(true)
+        addOrUpdateAddressData = addressRepo.addOrUpdateAddress("", null, false)
+        deleteOrDefaultAddressData = addressRepo.addOrUpdateAddress("", null, false)
+        deleteAddressData = addressRepo.deleteAddressById("", false)
+        getAddressByIdData = addressRepo.getAddressByID("", false)
     }
 
     fun onAddAddress(view: View, model: Address) {
@@ -51,9 +58,15 @@ class AddressVM : ViewModel() {
 
             val shop = model.shopName
             val street = model.street
-            val townId = model.town
+            val townId = model.townId
+            val town = model.town
             val district = model.district
-            val stateId = model.state
+
+            // Region
+            val stateId = model.stateId
+            val regionName = model.region
+            val regionCode = model.regionCode
+
             val pincode = model.pincode
 
             val userInputs = arrayOf(shop, street, district, pincode)
@@ -102,12 +115,11 @@ class AddressVM : ViewModel() {
                 MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME, "") ?: ""
             addressIn.customer.lastname =
                 MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME, "") ?: ""
-/*            val address =
-                MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
-
-            if (!address.isEmpty()) {
-                addressIn.customer.addresses = UtilsFunctions.getUserAddress(address)
-            }*/
+            addressIn.customer.store_id =
+                UtilsFunctions.getLanguageStoreId(MyApplication.instance).toInt()
+            addressIn.customer.website_id = AppConstants.WEBSITE_ID.toInt()
+            addressIn.customer.disable_auto_group_change =
+                AppConstants.DISABLE_AUTO_GROUP_CHANGE.toInt()
 
             // Create new address for new id - 0
             try {
@@ -120,7 +132,7 @@ class AddressVM : ViewModel() {
                 }
 
                 // Get selected state
-                var allStates = arrayListOf<AllStatesOut>()
+/*                var allStates = arrayListOf<AllStatesOut>()
                 val states = MyApplication.sharedPref.getString(PreferenceKeys.ALL_STATES, "") ?: ""
                 if (!states.isEmpty()) {
                     val myType = object : TypeToken<ArrayList<AllStatesOut>>() {}.type
@@ -139,15 +151,15 @@ class AddressVM : ViewModel() {
                         regionCode = region.code ?: ""
                         regionId = region.id?.toInt() ?: 0
                     }
-                }
+                }*/
 
                 val region = Region(
                     region = regionName,
                     region_code = regionCode,
-                    region_id = regionId
+                    region_id = stateId.toInt()
                 )
 
-                // All customer addresses + New address
+                // All customer addresses + New address (or Updated address)
                 // Customer all saved addresses
                 val savedAddress =
                     MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
@@ -160,28 +172,72 @@ class AddressVM : ViewModel() {
                     addressIn.customer.addresses.addAll(allAddresses)
                 }
 
-                //  Customer new Address
-                val newAddress = Addresses(
-                    city = townId,
-                    country_id = "IN",
-                    customer_id = "$customerId",
-                    firstname = MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME, "")
-                        ?: "",
-                    id = "0",
-                    lastname = MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME, "")
-                        ?: "",
-                    postcode = pincode,
-                    custom_attributes = CustomAttributes(
-                        District(attribute_code = "district", value = townId)
-                    ),
-//                    district = district,
-                    region = region,
-                    region_id = "$regionId",
-                    street = arrayListOf(street),
-                    telephone = MyApplication.sharedPref.getString(PreferenceKeys.PHONE_NO, "")
-                        ?: ""
-                )
-                addressIn.customer.addresses.add(newAddress)
+                // All custom attributes
+                val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
+                val myType = object : TypeToken<LoginOut>() {}.type
+                val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
+
+                if (userObj.custom_attributes != null) {
+                    for (i in 0..userObj.custom_attributes.size - 1) {
+                        val attributeCode = userObj.custom_attributes[i].attribute_code
+//                                    var value = userObj.custom_attributes[i].value
+                        if (attributeCode.equals("shopname")) {
+                            userObj.custom_attributes[i].value = shop
+                            break
+                        }
+                    }
+                }
+                addressIn.customer.custom_attributes.clear()
+                addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
+
+                // Check if user adding new address or Editing/Updating an existing address
+                if (model.isEditable) {
+                    // Edit existing address
+                    val addressIdOfEditingAddress = model.addressIdToEdit
+
+                    val savedAddresses = addressIn.customer.addresses
+                    for (address in savedAddresses) {
+                        if (address.id.equals(addressIdOfEditingAddress)) {
+
+                            // Update address fields
+                            // Delete old steet and add new
+                            address.street.clear()
+                            address.street.add(street)
+                            address.city = town
+                            address.district = townId
+                            address.postcode = pincode
+                            address.region = Region(
+                                region = regionName,
+                                region_code = regionCode,
+                                region_id = stateId.toInt()
+                            )
+                            address.region_id = stateId
+                        }
+                    }
+                } else {
+                    //  Customer new Address
+                    val newAddress = Addresses(
+                        city = town,
+                        country_id = "IN",
+                        customer_id = "$customerId",
+                        firstname = MyApplication.sharedPref.getString(
+                            PreferenceKeys.FIRST_NAME,
+                            ""
+                        )
+                            ?: "",
+                        id = "0",
+                        lastname = MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME, "")
+                            ?: "",
+                        postcode = pincode,
+                        district = townId,
+                        region = region,
+                        region_id = "$stateId",
+                        street = arrayListOf(street),
+                        telephone = MyApplication.sharedPref.getString(PreferenceKeys.PHONE_NO, "")
+                            ?: ""
+                    )
+                    addressIn.customer.addresses.add(newAddress)
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -189,6 +245,105 @@ class AddressVM : ViewModel() {
             addOrUpdateAddressData = addressRepo.addOrUpdateAddress(custId, addressIn, true)
             isLoading.postValue(true)
         }
+    }
+
+    fun deleteAddressByCommonModel(addressId: String) {
+        val addressIn = AddressIn()
+        val custId = MyApplication.sharedPref.getString(PreferenceKeys.CUSTOMER_ID, "") ?: ""
+        addressIn.customer.id = if (!custId.isEmpty()) custId.toInt() else "0".toInt()
+        addressIn.customer.group_id = AppConstants.GROUP_ID.toInt()
+        addressIn.customer.email =
+            MyApplication.sharedPref.getString(PreferenceKeys.EMAIL, "") ?: ""
+        addressIn.customer.firstname =
+            MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME, "") ?: ""
+        addressIn.customer.lastname =
+            MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME, "") ?: ""
+        addressIn.customer.store_id =
+            UtilsFunctions.getLanguageStoreId(MyApplication.instance).toInt()
+        addressIn.customer.website_id = AppConstants.WEBSITE_ID.toInt()
+        addressIn.customer.disable_auto_group_change =
+            AppConstants.DISABLE_AUTO_GROUP_CHANGE.toInt()
+
+        // All customer addresses + New address (or Updated address)
+        // Customer all saved addresses
+        val savedAddress =
+            MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
+        if (!savedAddress.isEmpty()) {
+            val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
+            val allAddresses = MyApplication.gson.fromJson<ArrayList<Addresses>>(
+                savedAddress,
+                myType
+            )
+
+            for (address in allAddresses) {
+                if (address.id.equals(addressId)) {
+                    allAddresses.remove(address)
+                    break
+                }
+            }
+            addressIn.customer.addresses.addAll(allAddresses)
+
+            // Same method for ADD/UPDATE/DELETE address
+            deleteOrDefaultAddressData = addressRepo.addOrUpdateAddress(custId, addressIn, true)
+        }
+
+        // All custom attributes from Login Model
+        val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
+        val myType = object : TypeToken<LoginOut>() {}.type
+        val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
+
+        addressIn.customer.custom_attributes.clear()
+        addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
+    }
+
+    fun setAnAddressAsDefaultByCommonModel(addressId: String) {
+        val addressIn = AddressIn()
+        val custId = MyApplication.sharedPref.getString(PreferenceKeys.CUSTOMER_ID, "") ?: ""
+        addressIn.customer.id = if (!custId.isEmpty()) custId.toInt() else "0".toInt()
+        addressIn.customer.group_id = AppConstants.GROUP_ID.toInt()
+        addressIn.customer.email =
+            MyApplication.sharedPref.getString(PreferenceKeys.EMAIL, "") ?: ""
+        addressIn.customer.firstname =
+            MyApplication.sharedPref.getString(PreferenceKeys.FIRST_NAME, "") ?: ""
+        addressIn.customer.lastname =
+            MyApplication.sharedPref.getString(PreferenceKeys.LAST_NAME, "") ?: ""
+        addressIn.customer.store_id =
+            UtilsFunctions.getLanguageStoreId(MyApplication.instance).toInt()
+        addressIn.customer.website_id = AppConstants.WEBSITE_ID.toInt()
+        addressIn.customer.disable_auto_group_change =
+            AppConstants.DISABLE_AUTO_GROUP_CHANGE.toInt()
+
+        // All customer addresses + New address (or Updated address)
+        // Customer all saved addresses
+        val savedAddress =
+            MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""
+        if (!savedAddress.isEmpty()) {
+            val myType = object : TypeToken<ArrayList<Addresses>>() {}.type
+            val allAddresses = MyApplication.gson.fromJson<ArrayList<Addresses>>(
+                savedAddress,
+                myType
+            )
+
+            for (address in allAddresses) {
+                if (address.id.equals(addressId)) {
+                    address.default_billing = true
+                    address.default_shipping = true
+                    break
+                }
+            }
+            addressIn.customer.addresses.addAll(allAddresses)
+
+            // Same method for ADD/UPDATE/DELETE address
+            deleteOrDefaultAddressData = addressRepo.addOrUpdateAddress(custId, addressIn, true)
+        }
+
+        // All custom attributes from Login Model
+        val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
+        val myType = object : TypeToken<LoginOut>() {}.type
+        val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
+
+        addressIn.customer.custom_attributes.clear()
+        addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
     }
 
     fun deleteAddressById(addressId: String) {
@@ -215,6 +370,10 @@ class AddressVM : ViewModel() {
 
     fun addOrUpdateAddressResponse(): LiveData<AddressOut> {
         return addOrUpdateAddressData
+    }
+
+    fun deleteOrDefaultAnAddressResponse(): LiveData<AddressOut> {
+        return deleteOrDefaultAddressData
     }
 
     fun deleteAddressResponse(): LiveData<Boolean> {

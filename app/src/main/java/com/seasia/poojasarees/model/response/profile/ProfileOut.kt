@@ -1,7 +1,7 @@
 package com.seasia.poojasarees.model.response.profile
 
 data class ProfileOut(
-    val addresses: ArrayList<Addresse>? = arrayListOf(),
+//    val addresses: ArrayList<Addresse>? = arrayListOf(),
     val created_at: String? = "",
     val created_in: String? = "",
     val custom_attributes: ArrayList<CustomAttribute>? = arrayListOf(),
@@ -22,7 +22,7 @@ data class ProfileOut(
     val website_id: Int? = 0
 ) {
 
-    data class Addresse(
+/*    data class Addresse(
         val city: String? = "",
         val country_id: String? = "",
         val customer_id: Int? = 0,
@@ -39,6 +39,13 @@ data class ProfileOut(
         val telephone: String? = ""
     )
 
+
+    data class Region(
+        val region: String? = "",
+        val region_code: String? = "",
+        val region_id: Int? = 0
+    )*/
+
     data class CustomAttribute(
         val attribute_code: String? = "",
         val value: String? = ""
@@ -46,11 +53,5 @@ data class ProfileOut(
 
     data class ExtensionAttributes(
         val is_subscribed: Boolean? = false
-    )
-
-    data class Region(
-        val region: String? = "",
-        val region_code: String? = "",
-        val region_id: Int? = 0
     )
 }

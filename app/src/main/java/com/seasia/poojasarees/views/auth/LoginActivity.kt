@@ -119,6 +119,8 @@ class LoginActivity : BaseActivity() {
             stopProgressDialog()
 
             if (it != null) {
+                MyApplication.sharedPref.save(PreferenceKeys.USER_OBJECT, it)
+
                 MyApplication.sharedPref.saveString(PreferenceKeys.FIRST_NAME, it.firstname ?: "")
                 MyApplication.sharedPref.saveString(PreferenceKeys.LAST_NAME, it.lastname ?: "")
                 MyApplication.sharedPref.saveString(
@@ -142,7 +144,7 @@ class LoginActivity : BaseActivity() {
 
                 // Default Address
                 val userAddress = it.addresses
-                if (userAddress != null && !userAddress.isEmpty()) {
+                if (userAddress != null) {
                     // SAVE all User addresses
 
                     MyApplication.sharedPref.save(PreferenceKeys.USER_ALL_ADDRESS, userAddress)
@@ -184,6 +186,12 @@ class LoginActivity : BaseActivity() {
                         if (attributeCode.equals("phone_number")) {
                             MyApplication.sharedPref.saveString(
                                 PreferenceKeys.PHONE_NO,
+                                value ?: ""
+                            )
+                        }
+                        if (attributeCode.equals("shopname")) {
+                            MyApplication.sharedPref.saveString(
+                                PreferenceKeys.SHOP_NAME,
                                 value ?: ""
                             )
                         }

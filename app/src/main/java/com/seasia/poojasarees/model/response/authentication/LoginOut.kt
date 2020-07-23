@@ -29,14 +29,14 @@ data class LoginOut(
         val terms_conditions: String? = ""
     )
 
-    data class CustomAttribute(
-        val attribute_code: String? = "",
-        val value: String? = ""
-    )
-
     class ExtensionAttributes(
     )
 }
+
+data class CustomAttribute(
+    val attribute_code: String? = "",
+    var value: String? = ""
+)
 
 /*
 data class Addresses(

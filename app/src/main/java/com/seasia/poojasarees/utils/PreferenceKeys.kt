@@ -1,6 +1,7 @@
 package com.seasia.poojasarees.utils
 
 internal object PreferenceKeys {
+    var USER_OBJECT = "user"
 
     var LOGIN_TOKEN = "login_token"
     var LOGIN_TOKEN1 = "login_token"
@@ -8,6 +9,7 @@ internal object PreferenceKeys {
     val CUSTOMER_TOKEN = "customer_token"
     val FIRST_NAME = "first_name"
     val LAST_NAME = "last_name"
+    val SHOP_NAME = "shop_name"
     val PHONE_NO = "phoneNo"
     val EMAIL = "email"
     val ALL_STATES = "allStates"

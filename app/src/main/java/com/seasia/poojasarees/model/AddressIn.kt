@@ -1,11 +1,14 @@
 package com.seasia.poojasarees.model
 
+import com.seasia.poojasarees.model.response.authentication.CustomAttribute
+import com.seasia.poojasarees.model.response.authentication.LoginOut
 import java.io.Serializable
 
 data class AddressIn(
     var customer: Customer = Customer()
 ) {
     data class Customer(
+//        var loginOut: LoginOut? = null
         var addresses: ArrayList<Addresses> = arrayListOf(),
         var custom_attributes: ArrayList<CustomAttribute> = arrayListOf(),
         var disable_auto_group_change: Int = 0,
@@ -15,20 +18,16 @@ data class AddressIn(
         var id: Int = 0,
         var lastname: String = "",
         var store_id: Int = 0,
-        var taxvat: String = "",
+//        var taxvat: String = "",
         var website_id: Int = 0
-    ): Serializable
-
-    data class CustomAttribute(
-        var attribute_code: String = "",
-        var value: String = ""
     ): Serializable
 }
 
 data class Addresses(
     var city: String = "",
+    var district: String = "",
     var country_id: String = "",
-    var custom_attributes: CustomAttributes = CustomAttributes(),
+//    var custom_attributes: CustomAttributes = CustomAttributes(),
     var customer_id: String = "",
     var default_billing: Boolean = false,
     var default_shipping: Boolean = false,
@@ -43,17 +42,22 @@ data class Addresses(
     var telephone: String = ""
 ): Serializable
 
-data class CustomAttributes(
+/*data class CustomAttributes(
     var district: District = District()
 ): Serializable
 
 data class District(
     var attribute_code: String = "",
     var value: String = ""
-): Serializable
+): Serializable*/
 
 data class Region(
     var region: String = "",
     var region_code: String = "",
     var region_id: Int = 0
 ): Serializable
+
+/*data class CustomAttribute(
+    var attribute_code: String = "",
+    var value: String = ""
+): Serializable*/

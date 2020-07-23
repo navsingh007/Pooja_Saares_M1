@@ -151,6 +151,7 @@ class ProfileVM : ViewModel() {
             updateProfile.customer.gender = gender
             updateProfile.customer.dob = model.dob
             updateProfile.customer.group_id = AppConstants.GROUP_ID
+            updateProfile.customer.store_id = UtilsFunctions.getLanguageStoreId(MyApplication.instance).toInt()
             updateProfile.customer.website_id = AppConstants.WEBSITE_ID
             updateProfile.customer.disable_auto_group_change =
                 AppConstants.DISABLE_AUTO_GROUP_CHANGE

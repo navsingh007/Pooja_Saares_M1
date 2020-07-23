@@ -526,7 +526,7 @@ object UtilsFunctions {
         return when (LocaleManager.getLanguagePref(context)) {
             LocaleManager.HINDI -> "2"
             LocaleManager.ENGLISH -> "1"
-            else -> ""
+            else -> "0"
         }
     }
 }

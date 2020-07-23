@@ -111,7 +111,7 @@ class ProfileActivity : BaseActivity() {
                 MyApplication.sharedPref.saveString(PreferenceKeys.LAST_NAME, it.lastname ?: "")
 
                 // Save updated profile address ID as default
-                val addresses = it.addresses
+/*                val addresses = it.addresses
                 if (addresses != null && !addresses.isEmpty()) {
                     for (address in addresses) {
                         if (address.default_billing != null && address.default_billing) {
@@ -122,7 +122,7 @@ class ProfileActivity : BaseActivity() {
                             break
                         }
                     }
-                }
+                }*/
 
 //                profileUpdatedSuccessDialog()
 

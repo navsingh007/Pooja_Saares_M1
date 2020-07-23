@@ -201,16 +201,16 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
             val email = it.email
             val gstNo = it.taxvat
             var town = ""
-            var street = ""
-            var state = ""
-            var pincode = ""
+//            var street = ""
+//            var state = ""
+//            var pincode = ""
 
-            if (it.addresses != null && it.addresses.size > 0) {
+/*            if (it.addresses != null && it.addresses.size > 0) {
                 street = it.addresses[0].street?.component1() ?: ""
                 state = it.addresses[0].region?.region ?: ""
                 stateResponse = state
                 pincode = it.addresses[0].postcode ?: ""
-            }
+            }*/
 
             if (it.custom_attributes != null) {
                 for (i in 0..it.custom_attributes.size - 1) {
@@ -237,10 +237,9 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
             binding.etShop.setText(shopName)
             binding.etMobileNo.setText(mobile)
             binding.etGstNo.setText(gstNo)
-            binding.etStreet.setText(street)
-//            binding.etTown.setText(town)
+//            binding.etStreet.setText(street)
 //            binding.spnState.text.setText(state)
-            binding.etPincode.setText(pincode)
+//            binding.etPincode.setText(pincode)
 
             if (!town.isEmpty()) {
                 var townName = ""
@@ -331,9 +330,15 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
                         }
                     }
 
-                    Log.d("ProfContFrag ======> ", "Inside Index - $townCity - $townIndex - $isDefault")
+                    Log.d(
+                        "ProfContFrag ======> ",
+                        "Inside Index - $townCity - $townIndex - $isDefault"
+                    )
                     if (!isDefault) {
-                        Log.d("ProfContFrag ======> ", "Outside Index - $townCity - $townIndex - $isDefault")
+                        Log.d(
+                            "ProfContFrag ======> ",
+                            "Outside Index - $townCity - $townIndex - $isDefault"
+                        )
                         binding.spnTown.selection = townAdapter!!.getPosition(townCity)
                     }
 //                    binding.spnTown.selection =
@@ -376,7 +381,7 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
 
 
     private fun hideKeyboardOnSpinnerClick() {
-        binding.spnTown.setOnFocusChangeListener(object: View.OnFocusChangeListener {
+        binding.spnTown.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(p0: View?, isFocused: Boolean) {
                 if (isFocused) {
                     UtilsFunctions.hideKeyboardActivity(baseActivity)
