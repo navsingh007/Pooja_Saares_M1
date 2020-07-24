@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.reflect.TypeToken
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
@@ -15,6 +16,7 @@ import com.seasia.poojasarees.model.AddressOut
 import com.seasia.poojasarees.model.Addresses
 import com.seasia.poojasarees.model.response.AllStatesOut
 import com.seasia.poojasarees.model.response.AllTownsOut
+import com.seasia.poojasarees.model.response.authentication.LoginOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.address.AddressVM
 import com.tiper.MaterialSpinner
@@ -23,6 +25,9 @@ class AddAddressActivity : BaseActivity() {
     private lateinit var binding: ActivityAddAddressBinding
     private lateinit var addressVM: AddressVM
     private var address: Address? = null
+    private var isUserUpdatingAddress = false
+    private var city = ""
+    private var state = ""
 
     // States
     private var allStatesInCountry = ArrayList<String>()
@@ -120,7 +125,7 @@ class AddAddressActivity : BaseActivity() {
                         if (selectedCity.equals(townWithId.value)) {
                             townId = townWithId.option_id ?: ""
 
-                            UtilsFunctions.showToastSuccess("townId - $townId")
+//                            UtilsFunctions.showToastSuccess("townId - $townId")
                         }
                     }
                     address?.town = selectedCity
@@ -132,7 +137,7 @@ class AddAddressActivity : BaseActivity() {
                         address?.stateId = it[position].id ?: ""
                         address?.region = it[position].name ?: ""
                         address?.regionCode = it[position].code ?: ""
-                        UtilsFunctions.showToastSuccess("stateId - ${it[position].id}")
+//                        UtilsFunctions.showToastSuccess("stateId - ${it[position].id}")
                     }
 
 /*                    allStatesInCountry.let {
@@ -154,15 +159,38 @@ class AddAddressActivity : BaseActivity() {
     private fun getExtras() {
         val editAddress = intent.getSerializableExtra("editAddress")
         if (editAddress != null) {
+            isUserUpdatingAddress = true
+
             val editableAddress = editAddress as Addresses
 
-            val city = editableAddress.city
+            city = editableAddress.city
             val pincode = editableAddress.postcode
             val street = editableAddress.street?.get(0) ?: ""
-            val state = editableAddress.region?.region ?: ""
+            state = editableAddress.region?.region ?: ""
+
+            // City and State set in observer after value comes from API's
+
+/*              var townCityId = ""
+
+            // All custom attributes
+          val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
+            val myType = object : TypeToken<LoginOut>() {}.type
+            val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
+
+            if (userObj.custom_attributes != null) {
+                for (i in 0..userObj.custom_attributes.size - 1) {
+                    val attributeCode = userObj.custom_attributes[i].attribute_code
+//                                    var value = userObj.custom_attributes[i].value
+                    if (attributeCode.equals("town_city_dropdown")) {
+                        townCityId = userObj.custom_attributes[i].value ?: "0"
+                        break
+                    }
+                }
+            }*/
+
 
             address?.shopName = MyApplication.sharedPref.getString(PreferenceKeys.SHOP_NAME, "") ?: ""
-            address?.town = city ?: ""
+//            address?.town = city ?: ""
             address?.pincode = pincode ?: ""
             address?.street = street
 
@@ -234,6 +262,12 @@ class AddAddressActivity : BaseActivity() {
                     allStatesInCountry.clear()
                     allStatesInCountry.addAll(stateNames)
                     allStatesAdapter?.notifyDataSetChanged()
+
+
+                    // Set already selected State in case, updating address
+                    if (isUserUpdatingAddress) {
+                        binding.spnState.selection = allStatesAdapter!!.getPosition(state)
+                    }
                 }
             }
         })
@@ -258,6 +292,12 @@ class AddAddressActivity : BaseActivity() {
                     townList.clear()
                     townList.addAll(towns)
                     townAdapter?.notifyDataSetChanged()
+
+
+                    // Set already selected Town in case, updating address
+                    if (isUserUpdatingAddress) {
+                        binding.spnTown.selection = townAdapter!!.getPosition(city)
+                    }
                 }
             }
         })

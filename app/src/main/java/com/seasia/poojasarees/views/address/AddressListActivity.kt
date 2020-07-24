@@ -91,7 +91,7 @@ class AddressListActivity : BaseActivity() {
         override fun onDeleteAddress(addressId: String) {
 
             deleteOrDefaultFlag = DELETE_ADDRESS
-            addressVM.deleteAddressById(addressId)
+            addressVM.deleteAddressByCommonModel(addressId)
 
 /*             val userAddress =
                 MyApplication.sharedPref.getString(PreferenceKeys.USER_ALL_ADDRESS, "") ?: ""

@@ -212,4 +212,7 @@
     <string name="address_updated_success">Address updated successfully</string>
     <string name="address_deleted_success">Address deleted successfully</string>
     <string name="address_default_set_success">Address set as default successfully</string>
+
+    <!-- Home -->
+    <string name="home_no_image">No image to show</string>
 </resources>

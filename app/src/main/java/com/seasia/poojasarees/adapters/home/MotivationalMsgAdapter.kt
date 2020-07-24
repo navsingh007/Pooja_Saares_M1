@@ -1,6 +1,7 @@
 package com.seasia.poojasarees.adapters.home
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,8 +11,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.seasia.poojasarees.R
+import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.databinding.RowMotivationalMsgBinding
 import com.seasia.poojasarees.model.response.home.HomeOut
+import com.seasia.poojasarees.views.home.photoview.ViewPagerActivity
+import com.seasia.poojasarees.views.home.player.PlayerActivity
 
 
 class MotivationalMsgAdapter(
@@ -63,7 +67,26 @@ class MotivationalMsgAdapter(
             .into(holder.binding.ivMotivation)
 
         holder.binding.root.setOnClickListener {
-
+            val videoUrl = motivationalMsgList[position].url_banner
+            if (videoUrl != null && !videoUrl.isEmpty() && !videoUrl.equals("empty")) {
+                context.startActivity(
+                    Intent(context, PlayerActivity::class.java)
+                        .putExtra("URL", videoUrl)
+                )
+            } else {
+                // Media is an image, so open and zoom
+                val motivationalImages = ArrayList<String>()
+                for (images in motivationalMsgList) {
+                    if (!images.image.isNullOrEmpty()) {
+                        motivationalImages.add(images.image)
+                    }
+                }
+                if (motivationalImages.isEmpty()) {
+                    UtilsFunctions.showToastError(context.resources.getString(R.string.home_no_image))
+                    return@setOnClickListener
+                }
+                context.startActivity(Intent(context, ViewPagerActivity::class.java).putExtra("URL", motivationalImages))
+            }
         }
     }
 

@@ -264,6 +264,14 @@ class AddressVM : ViewModel() {
         addressIn.customer.disable_auto_group_change =
             AppConstants.DISABLE_AUTO_GROUP_CHANGE.toInt()
 
+        // All custom attributes from Login Model
+        val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
+        val myType = object : TypeToken<LoginOut>() {}.type
+        val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
+
+        addressIn.customer.custom_attributes.clear()
+        addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
+
         // All customer addresses + New address (or Updated address)
         // Customer all saved addresses
         val savedAddress =
@@ -285,15 +293,8 @@ class AddressVM : ViewModel() {
 
             // Same method for ADD/UPDATE/DELETE address
             deleteOrDefaultAddressData = addressRepo.addOrUpdateAddress(custId, addressIn, true)
+            isLoading.postValue(true)
         }
-
-        // All custom attributes from Login Model
-        val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
-        val myType = object : TypeToken<LoginOut>() {}.type
-        val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
-
-        addressIn.customer.custom_attributes.clear()
-        addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
     }
 
     fun setAnAddressAsDefaultByCommonModel(addressId: String) {
@@ -313,6 +314,14 @@ class AddressVM : ViewModel() {
         addressIn.customer.disable_auto_group_change =
             AppConstants.DISABLE_AUTO_GROUP_CHANGE.toInt()
 
+        // All custom attributes from Login Model
+        val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
+        val myType = object : TypeToken<LoginOut>() {}.type
+        val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
+
+        addressIn.customer.custom_attributes.clear()
+        addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
+
         // All customer addresses + New address (or Updated address)
         // Customer all saved addresses
         val savedAddress =
@@ -328,22 +337,17 @@ class AddressVM : ViewModel() {
                 if (address.id.equals(addressId)) {
                     address.default_billing = true
                     address.default_shipping = true
-                    break
+                } else {
+                    address.default_billing = false
+                    address.default_shipping = false
                 }
             }
             addressIn.customer.addresses.addAll(allAddresses)
 
             // Same method for ADD/UPDATE/DELETE address
             deleteOrDefaultAddressData = addressRepo.addOrUpdateAddress(custId, addressIn, true)
+            isLoading.postValue(true)
         }
-
-        // All custom attributes from Login Model
-        val rawUserObj = MyApplication.sharedPref.getString(PreferenceKeys.USER_OBJECT, "")
-        val myType = object : TypeToken<LoginOut>() {}.type
-        val userObj = MyApplication.gson.fromJson<LoginOut>(rawUserObj, myType)
-
-        addressIn.customer.custom_attributes.clear()
-        addressIn.customer.custom_attributes.addAll(userObj.custom_attributes!!)
     }
 
     fun deleteAddressById(addressId: String) {

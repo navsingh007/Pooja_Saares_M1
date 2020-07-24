@@ -22,7 +22,7 @@ class AddressAdapter(
     val deleteAddressDelegate: OnAddressDelete
 ) : RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     private var lastCheckedPos = -1
-    private var lastCheckedBtn: RadioButton? = null
+    private var lastChecked: RadioButton? = null
 
     @NonNull
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): ViewHolder {
@@ -68,33 +68,32 @@ class AddressAdapter(
             holder.binding.rbSelectedAddress.setChecked(false)
             holder.binding.rbSelectedAddress.setClickable(true)
         }
-        holder.binding.rbSelectedAddress.setOnClickListener {v ->
-            val clickedRadioBtn = v as RadioButton
-            val clickedBtnPos = clickedRadioBtn.tag as Int
+        holder.binding.rbSelectedAddress.setOnClickListener { v ->
+            val cb = v as RadioButton
+            val clickedPos = cb.tag as Int
 
-            if (clickedRadioBtn.isChecked) {
-                if (lastCheckedBtn != null) {
-                    clickedRadioBtn.isChecked = false
-
-                    addressList.get(lastCheckedPos).default_billing = false
-                    addressList.get(lastCheckedPos).default_shipping = false
+            if (cb.isChecked) {
+                if (lastChecked != null) {
+                    lastChecked?.isChecked = false
                 }
-                lastCheckedBtn = clickedRadioBtn
-                lastCheckedPos = clickedBtnPos
+                lastChecked = cb
+                lastCheckedPos = clickedPos
             } else {
-                lastCheckedBtn = null
+                lastChecked = null
             }
 
-            addressList.get(clickedBtnPos).default_billing = clickedRadioBtn.isChecked
-            addressList.get(clickedBtnPos).default_shipping = clickedRadioBtn.isChecked
+            // Update Shipping address status of selected address
 
-/*            if (addressList.get(position).default_shipping && addressList.get(position).default_billing) {
-                holder.binding.rbSelectedAddress.setChecked(false)
-            } else {
-                holder.binding.rbSelectedAddress.setChecked(true)
+/*            for ((i, address) in addressList.withIndex()) {
+                if (i == position) {
+                    address.default_shipping = true
+                    address.default_billing = true
+                } else {
+                    address.default_shipping = false
+                    address.default_billing = false
+                }
             }*/
-
-//            deleteAddressDelegate.onDefaultAddress(addressList.get(position).id)
+            deleteAddressDelegate.onDefaultAddress(addressList.get(position).id)
         }
     }
 

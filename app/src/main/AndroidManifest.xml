@@ -164,6 +164,14 @@
             android:name=".views.payment.PaymentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".views.home.player.PlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PlayerTheme" />
+
+        <activity android:name=".views.home.photoview.ViewPagerActivity"
+            android:theme="@style/PhotoViewTheme"/>
     </application>
 
 </manifest>
