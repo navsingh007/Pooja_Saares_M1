@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.preference.PreferenceManager
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.seasia.poojasarees.R
@@ -16,6 +17,7 @@ import java.util.*
 
 class MyApplication : MultiDexApplication() {
     private var customFontFamily: FontStyle? = null
+//    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate() {
         MultiDex.install(this)
@@ -24,6 +26,8 @@ class MyApplication : MultiDexApplication() {
         instance = this
         gson = GsonBuilder().serializeNulls().create()
         sharedPref = PrefStore(this)
+
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         MultiDex.install(this)
         customFontFamily = FontStyle.getInstance()
@@ -51,5 +55,6 @@ class MyApplication : MultiDexApplication() {
         lateinit var instance: MyApplication
         lateinit var gson: Gson
         lateinit var sharedPref: PrefStore
+        lateinit var firebaseAnalytics: FirebaseAnalytics
     }
 }

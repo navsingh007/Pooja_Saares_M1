@@ -216,4 +216,7 @@
 
     <!-- Home -->
     <string name="home_no_image">No image to show</string>
+
+    <!-- FCM -->
+    <string name="default_notification_channel_id">Pooja Sarees Channel</string>
 </resources>

@@ -2,11 +2,13 @@ package com.seasia.poojasarees.views.splash
 
 import android.content.Intent
 import android.text.TextUtils
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivitySplashBinding
+import com.seasia.poojasarees.fcm.FcmUtils
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.views.auth.LoginActivity
 import com.seasia.poojasarees.views.home.HomeActivity
@@ -21,6 +23,9 @@ class SplashActivity : BaseActivity() {
 
     override fun initViews() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+
+        val intanceId = FcmUtils.getInstanceId()
+        Log.d("Splash", "ID - $intanceId")
 
         Timer().schedule(object : TimerTask() {
             override fun run() {

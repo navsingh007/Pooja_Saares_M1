@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "367508052470",
+    "firebase_url": "https://pooja-sarees.firebaseio.com",
+    "project_id": "pooja-sarees",
+    "storage_bucket": "pooja-sarees.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367508052470:android:bfbfb17a40e5dfb446cfd7",
+        "android_client_info": {
+          "package_name": "com.seasia.poojasarees"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367508052470-o0lkvk57abagvcgu85d7kkr7j667crgn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seasia.poojasarees",
+            "certificate_hash": "bc9ed7c91fc93d25c8eef2ffdee0a9db89b81b70"
+          }
+        },
+        {
+          "client_id": "367508052470-ckv4vc1ojku8adg9ka8c5r20av6oocq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtEGSaenm3oc58TraV1_SSzmWQ0oHIGF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367508052470-ckv4vc1ojku8adg9ka8c5r20av6oocq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
@@ -121,6 +122,9 @@ class HomeActivity : BaseActivity(), ChoiceCallBack, DialogssInterface,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
         viewAllCategories()
+
+        // Log event
+        logHomeEvent()
     }
 
     private fun viewAllCategories() {
@@ -657,5 +661,12 @@ class HomeActivity : BaseActivity(), ChoiceCallBack, DialogssInterface,
 
     override fun networkUnavailable() {
         UtilsFunctions.showToastWarning(resources.getString(R.string.internet_connection))
+    }
+
+    private fun logHomeEvent() {
+        val bundle = Bundle()
+        bundle.putString("custom_id", "12")
+        bundle.putString("custom_name", "test")
+        MyApplication.firebaseAnalytics.logEvent("custom_event_test", bundle)
     }
 }

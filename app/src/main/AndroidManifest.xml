@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.seasia.poojasarees">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -143,7 +144,21 @@
         <activity
             android:name=".views.products.ProductDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <tools:validation testUrl="http://stgm.appsndevs.com/pooja/pub/media/catalog/product/i/m/" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="stgm.appsndevs.com"
+                    android:pathPrefix="/pooja/pub/media/catalog/product/i/m/"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".views.products.ProductListingFilterActivity"
@@ -170,8 +185,35 @@
             android:screenOrientation="portrait"
             android:theme="@style/PlayerTheme" />
 
-        <activity android:name=".views.home.photoview.ViewPagerActivity"
-            android:theme="@style/PhotoViewTheme"/>
+        <activity
+            android:name=".views.home.photoview.ViewPagerActivity"
+            android:theme="@style/PhotoViewTheme" />
+
+        <!-- FCM - start -->
+        <service
+            android:name=".fcm.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/app_icon" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!-- Notification channel From Android 8.0 (API level 26) and higher  -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <!-- FCM - end -->
     </application>
 
 </manifest>

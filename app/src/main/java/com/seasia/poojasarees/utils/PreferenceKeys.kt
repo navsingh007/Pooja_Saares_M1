@@ -26,6 +26,7 @@ internal object PreferenceKeys {
     val ADMIN_TOKEN = "Bearer 7j77knst6sbjwpqbur98bflj8opxzrh0"
     var TOKEN = "0"
     var GENDER = "userGender"
+    var FCM_DEVICE_TOKEN = "deviceToken"
 
 
 //    val EMAIL = "email"

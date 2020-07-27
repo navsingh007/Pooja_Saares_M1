@@ -1,6 +1,7 @@
 package com.seasia.poojasarees.views.auth
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityLoginBinding
+import com.seasia.poojasarees.fcm.FcmUtils
 import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.utils.LocaleManager
 import com.seasia.poojasarees.utils.PreferenceKeys
@@ -30,8 +32,11 @@ class LoginActivity : BaseActivity() {
 
     override fun initViews() {
         binding = viewDataBinding as ActivityLoginBinding
-
         loginVM = ViewModelProvider(this).get(LoginVM::class.java)
+
+//        val intanceId = FcmUtils.getInstanceId()
+        val instanceId = MyApplication.sharedPref.getString(PreferenceKeys.FCM_DEVICE_TOKEN, "") ?: ""
+        Log.d("Login", "ID - $instanceId")
 
 //        loginVM = LoginVM(this)
         binding.loginVM = loginVM
