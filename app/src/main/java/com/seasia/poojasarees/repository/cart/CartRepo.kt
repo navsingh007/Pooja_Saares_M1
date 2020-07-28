@@ -13,6 +13,7 @@ class CartRepo {
     private var createCartData: MutableLiveData<Int>? = null
     private var addToCartData: MutableLiveData<AddToCartOut>? = null
     private var getCustByCartIdData: MutableLiveData<CustomerByCartIdOut>? = null
+    private var deleteItemFromCartData: MutableLiveData<Boolean>? = null
     private val sessionExpire: MutableLiveData<Boolean>
     private val apiMsg: MutableLiveData<String>
 
@@ -20,6 +21,7 @@ class CartRepo {
         createCartData = MutableLiveData()
         addToCartData = MutableLiveData()
         getCustByCartIdData = MutableLiveData()
+        deleteItemFromCartData = MutableLiveData()
         apiMsg = MutableLiveData()
         sessionExpire = MutableLiveData()
         sessionExpire.postValue(false)
@@ -176,6 +178,59 @@ class CartRepo {
             })
         }
         return getCustByCartIdData!!
+    }
+
+    fun deleteItemFromCartResponse(
+        cartId: String?,
+        itemId: String?,
+        hit: Boolean
+    ): MutableLiveData<Boolean> {
+        if (hit) {
+            PreferenceKeys.TOKEN = "0"
+            val service = ApiClient.getApiInterface()
+            val call = service.deleteItemFromCart(cartId, itemId)
+
+            call.enqueue(object : retrofit2.Callback<Boolean> {
+                override fun onFailure(call: retrofit2.Call<Boolean>, t: Throwable) {
+//                    UtilsFunctions.showToastError(t.message!!)
+                    apiMsg.postValue(t.message!!)
+                    deleteItemFromCartData!!.value = null
+                }
+
+                override fun onResponse(
+                    call: retrofit2.Call<Boolean>,
+                    response: retrofit2.Response<Boolean>
+                ) {
+                    when (response.code()) {
+                        200 -> {
+                            deleteItemFromCartData!!.value = response.body()
+                        }
+                        400 -> {
+                            try {
+                                val jObjError =
+                                    JSONObject(response.errorBody()!!.string())
+                                val msg = jObjError.getString("message")
+                                apiMsg.postValue(msg)
+                            } catch (e: Exception) {
+                                apiMsg.postValue(e.message ?: "An error occured")
+                            }
+                            deleteItemFromCartData!!.value = null
+
+                        }
+                        401 -> {
+                            apiMsg.postValue("SESSION_EXPIRED")
+                            sessionExpire.postValue(true)
+                        }
+                        else -> {
+                            deleteItemFromCartData!!.value = null
+                            apiMsg.postValue("Something went wrong")
+//                            UtilsFunctions.showToastError("Something went wrong")
+                        }
+                    }
+                }
+            })
+        }
+        return deleteItemFromCartData!!
     }
 
     fun showApiMsg(): MutableLiveData<String> {

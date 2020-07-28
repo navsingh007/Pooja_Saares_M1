@@ -8,6 +8,8 @@ import com.seasia.poojasarees.model.request.SignUpIn;
 import com.seasia.poojasarees.model.request.UpdateProfileIn;
 import com.seasia.poojasarees.model.request.cart.AddToCartIn;
 import com.seasia.poojasarees.model.AddressOut;
+import com.seasia.poojasarees.model.request.shipping.PaymentInfoIn;
+import com.seasia.poojasarees.model.request.shipping.ShippingInfoIn;
 import com.seasia.poojasarees.model.response.AllStatesOut;
 import com.seasia.poojasarees.model.response.AllTownsOut;
 import com.seasia.poojasarees.model.response.cart.AddToCartOut;
@@ -16,6 +18,7 @@ import com.seasia.poojasarees.model.response.category.CategoryListOut;
 import com.seasia.poojasarees.model.response.home.HomeOut;
 import com.seasia.poojasarees.model.response.authentication.LoginOut;
 import com.seasia.poojasarees.model.response.authentication.OtpOut;
+import com.seasia.poojasarees.model.response.orderpayment.PlaceOrderIn;
 import com.seasia.poojasarees.model.response.products.ProductDetailsOut;
 import com.seasia.poojasarees.model.response.products.ProductFilterAttributes;
 import com.seasia.poojasarees.model.response.products.ProductsByCategoryIdOut;
@@ -23,6 +26,8 @@ import com.seasia.poojasarees.model.response.profile.ProfileOut;
 import com.seasia.poojasarees.model.response.profile.ProfilePicOut;
 import com.seasia.poojasarees.model.response.authentication.SignUpOut;
 import com.seasia.poojasarees.model.response.authentication.SignupPhoneNoOut;
+import com.seasia.poojasarees.model.response.shipping.AvailableShippingMethodOut;
+import com.seasia.poojasarees.model.response.shipping.SetShippingAndBillingAddressOut;
 import com.seasia.poojasarees.model.response.wishlist.AllWishlistProductsOut;
 
 import java.util.ArrayList;
@@ -163,4 +168,23 @@ public interface ApiInterface {
 
     @GET("carts/{id}")
     Call<CustomerByCartIdOut> getCustCartById(@Path("id") String cartId);
+
+    /**
+     * Below API's not tested, and response model may need to be updated
+     */
+    @DELETE("carts/{id}/items/{itemId}")
+    Call<Boolean> deleteItemFromCart(@Path("id") String cartId, @Path("itemId") String itemId);
+
+    // Shipping and Billing
+    @POST("carts/mine/estimate-shipping-methods-by-address-id")
+    Call<ArrayList<AvailableShippingMethodOut>> getAvailableShippingMethodsByAddressId(@Body JsonObject shippingMethodsIn);
+
+    @POST("carts/mine/shipping-information")
+    Call<SetShippingAndBillingAddressOut> setShippingAndBillingAddressForCart(@Body ShippingInfoIn shippingInfoIn);
+
+    @GET("carts/mine/payment-information")
+    Call<SetShippingAndBillingAddressOut> selectPaymentMethodForOrder(@Body PaymentInfoIn paymentInfoIn);
+
+    @PUT("carts/mine/order")
+    Call<String> placeOrder(@Body PlaceOrderIn placeOrderIn);
 }

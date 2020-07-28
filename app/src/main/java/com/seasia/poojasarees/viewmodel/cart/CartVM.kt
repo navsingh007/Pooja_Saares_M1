@@ -15,6 +15,7 @@ class CartVM: ViewModel() {
     private var createCartData: MutableLiveData<Int>
     private var addToCartData: MutableLiveData<AddToCartOut>
     private var getCustByCartIdData: MutableLiveData<CustomerByCartIdOut>
+    private var deleteItemFromCartData: MutableLiveData<Boolean>
     private val isLoading: MutableLiveData<Boolean>
     private val userMsg: MutableLiveData<String>
 
@@ -23,12 +24,14 @@ class CartVM: ViewModel() {
         createCartData = MutableLiveData<Int>()
         addToCartData = MutableLiveData<AddToCartOut>()
         getCustByCartIdData = MutableLiveData<CustomerByCartIdOut>()
+        deleteItemFromCartData = MutableLiveData<Boolean>()
         isLoading = MutableLiveData<Boolean>()
         userMsg = MutableLiveData<String>()
 
         createCartData = cartRepo.createCartResponse(false)
         addToCartData = cartRepo.addToCartReponse(null, false)
         getCustByCartIdData = cartRepo.getCustomerByCartIdResponse(null, false)
+        deleteItemFromCartData = cartRepo.deleteItemFromCartResponse("", "", false)
     }
 
     fun createCart() {
@@ -57,6 +60,13 @@ class CartVM: ViewModel() {
         }
     }
 
+    fun deleteItemByCartId(cartId: String, itemId: String) {
+        if (UtilsFunctions.isNetworkConnected()) {
+            deleteItemFromCartData = cartRepo.deleteItemFromCartResponse(cartId, itemId, true)
+            isLoading.postValue(true)
+        }
+    }
+
     fun onCreateCart(): LiveData<Int> {
         return createCartData
     }
@@ -67,6 +77,10 @@ class CartVM: ViewModel() {
 
     fun getAllCartProducts(): LiveData<CustomerByCartIdOut> {
         return getCustByCartIdData
+    }
+
+    fun deleteItemFromCart(): LiveData<Boolean> {
+        return deleteItemFromCartData
     }
 
     fun isLoading(): LiveData<Boolean> {

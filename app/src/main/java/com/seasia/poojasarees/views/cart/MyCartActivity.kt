@@ -28,6 +28,7 @@ class MyCartActivity: BaseActivity() {
         createCartObserver()
         addToCartObserver()
         allCartItemsObserver()
+        deleteItemFromCartObserver()
 
         cartVM.createCart()
     }
@@ -59,6 +60,20 @@ class MyCartActivity: BaseActivity() {
 
             if (allCartItems != null) {
 
+            }
+        })
+    }
+
+    private fun deleteItemFromCartObserver() {
+        cartVM.deleteItemFromCart().observe(this, Observer { deleteCartItem ->
+            stopProgressDialog()
+
+            if (deleteCartItem != null) {
+                if (deleteCartItem) {
+                    // Item deleted from cart
+                } else {
+                    // Item not deleted from cart
+                }
             }
         })
     }
