@@ -18,9 +18,7 @@
         android:layout_marginTop="-15dp"
         android:layout_marginBottom="-15dp"
         android:fitsSystemWindows="true"
-        android:background="@drawable/signup_whole"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:background="@drawable/signup_whole">
 
         <!--        <ImageView
                     android:id="@+id/ivBackground"
@@ -64,19 +62,21 @@
             android:layout_marginTop="-23dp"/>
 
         <ScrollView
+            android:id="@+id/svRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rlToolbar">
 
+            <!--android:layout_gravity="center_vertical"-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_150" />
+                    android:layout_height="@dimen/dp_60"
+                    android:visibility="visible"/>
 
                 <!--android:layout_marginTop="@dimen/dp_150"-->
                 <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -84,6 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/dp_100"
                     android:paddingBottom="@dimen/dp_20">
 
                     <androidx.cardview.widget.CardView

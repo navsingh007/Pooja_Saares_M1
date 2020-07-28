@@ -25,6 +25,8 @@ import com.seasia.poojasarees.viewmodel.auth.SignupVM
 import com.stfalcon.smsverifycatcher.OnSmsCatchListener
 
 import com.stfalcon.smsverifycatcher.SmsVerifyCatcher
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -67,6 +69,7 @@ class SignupOtpVerifyActivity : BaseActivity() {
         singupChanges()
         showApiMsgObserver()
         showUserWarningObserver()
+        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun singupChanges() {
@@ -265,5 +268,20 @@ class SignupOtpVerifyActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+                    if (isOpen) {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+                    } else {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+                    }
+                }
+            })
     }
 }

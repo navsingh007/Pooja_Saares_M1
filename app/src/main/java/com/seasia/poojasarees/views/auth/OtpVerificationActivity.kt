@@ -18,6 +18,8 @@ import com.seasia.poojasarees.databinding.ActivityOtpVerificationBinding
 import com.seasia.poojasarees.viewmodel.auth.OtpVM
 import com.seasia.poojasarees.viewmodel.auth.OtpVM.Companion.ENTER_OTP
 import com.seasia.poojasarees.viewmodel.auth.OtpVM.Companion.MIN_OTP
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 
 class OtpVerificationActivity : BaseActivity() {
@@ -73,6 +75,8 @@ class OtpVerificationActivity : BaseActivity() {
             val otp = "$a$b$c$d"
             UtilsFunctions.showToastSuccess(otp)
         }*/
+
+        moveViewToCenterOnKeyboardOpen()
     }
 
     fun resendOtp(v: View) {
@@ -266,5 +270,20 @@ class OtpVerificationActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+                    if (isOpen) {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+                    } else {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+                    }
+                }
+            })
     }
 }

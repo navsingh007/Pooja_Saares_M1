@@ -23,6 +23,8 @@ import com.seasia.poojasarees.utils.DialogClass
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.auth.SignupVM
 import com.tiper.MaterialSpinner
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 
 class SignupActivity : BaseActivity(), FusedLocationClass.FusedLocationInterface {
@@ -65,6 +67,7 @@ class SignupActivity : BaseActivity(), FusedLocationClass.FusedLocationInterface
 //        initLocationUpdates()
         setTownsAdapter()
         hideKeyboardOnSpinnerClick()
+//        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun setTownsAdapter() {
@@ -314,5 +317,21 @@ class SignupActivity : BaseActivity(), FusedLocationClass.FusedLocationInterface
         if (fusedLocationClass != null) {
             fusedLocationClass?.stopLocationUpdates()
         }
+    }
+
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+//                    if (isOpen) {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+//                    } else {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+//                    }
+                }
+            })
     }
 }

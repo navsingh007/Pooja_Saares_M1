@@ -1,6 +1,7 @@
 package com.seasia.poojasarees.views.auth
 
 import android.content.Intent
+import android.view.View
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,8 @@ import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivityForgotPasswordBinding
 import com.seasia.poojasarees.viewmodel.auth.ForgotPasswordVM
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 class ForgotPasswordActivity : BaseActivity() {
     private lateinit var binding: ActivityForgotPasswordBinding
@@ -35,6 +38,8 @@ class ForgotPasswordActivity : BaseActivity() {
         isAlreadyRegisteredPhoneObserver()
         loadingObserver()
         showApiMsgObserver()
+
+        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun setToolbar() {
@@ -96,5 +101,20 @@ class ForgotPasswordActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+                    if (isOpen) {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+                    } else {
+                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+                    }
+                }
+            })
     }
 }

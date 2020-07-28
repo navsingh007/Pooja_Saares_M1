@@ -22,6 +22,8 @@ import com.seasia.poojasarees.model.response.ProfileOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.profile.ProfileVM
 import com.tiper.MaterialSpinner
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -100,6 +102,7 @@ class ProfilePersonalFragment : BaseFragment() { //, ProfileActivity.OnGetProfil
         showApiMsgObserver()
         selectDob()
         hideKeyboardOnSpinnerClick()
+//        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun selectDob() {
@@ -258,6 +261,14 @@ class ProfilePersonalFragment : BaseFragment() { //, ProfileActivity.OnGetProfil
         binding.etEducationalQualifications.setText(qualification)
         binding.etLanguageKnown.setText(languageKnown)
         binding.etHobby.setText(hobbies)
+
+        setFocusAtEndOfEdittext()
+    }
+
+    private fun setFocusAtEndOfEdittext() {
+        binding.etEducationalQualifications.setSelection(binding.etEducationalQualifications.text.toString().length)
+        binding.etLanguageKnown.setSelection(binding.etLanguageKnown.text.toString().length)
+        binding.etHobby.setSelection(binding.etHobby.text.toString().length)
     }
 
     private fun loadingObserver() {
@@ -350,5 +361,20 @@ class ProfilePersonalFragment : BaseFragment() { //, ProfileActivity.OnGetProfil
                 Log.e("ProfileFrag: ", "setUserVisibleHint: ", e)
             }
         }
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            baseActivity,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+//                    if (isOpen) {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+//                    } else {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+//                    }
+                }
+            })
     }
 }

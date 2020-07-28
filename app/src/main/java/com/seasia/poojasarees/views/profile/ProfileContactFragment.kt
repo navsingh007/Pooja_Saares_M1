@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,9 @@ import com.seasia.poojasarees.model.response.ProfileOut
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.profile.ProfileVM
 import com.tiper.MaterialSpinner
+import kotlinx.android.synthetic.main.activity_change_password.*
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 
 class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile {
@@ -77,6 +82,9 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
         allTownObserver()
         setTownsAdapter()
         hideKeyboardOnSpinnerClick()
+        moveViewToCenterOnKeyboardOpen()
+
+//        adjustResizeProgramatically()
     }
 
     val tw = object : TextWatcher {
@@ -163,6 +171,8 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
                     }
 
                     profile?.town = townId
+
+                    binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
                 }
             }
 
@@ -248,6 +258,15 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
                 townCity = townName
             }
         }
+        setFocusAtEndOfEdittext()
+    }
+
+    private fun setFocusAtEndOfEdittext() {
+        binding.etName.setSelection(binding.etName.text.toString().length)
+        binding.etLastName.setSelection(binding.etLastName.text.toString().length)
+        binding.etShop.setSelection(binding.etShop.text.toString().length)
+        binding.etEmail.setSelection(binding.etEmail.text.toString().length)
+        binding.etGstNo.setSelection(binding.etGstNo.text.toString().length)
     }
 
     private fun getProfileObserver() {
@@ -382,5 +401,44 @@ class ProfileContactFragment : BaseFragment() { //, ProfileActivity.OnGetProfile
                 Log.e("ProfileFrag: ", "setUserVisibleHint: ", e)
             }
         }
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            baseActivity,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+
+                    // write your code
+//                    if (isOpen) {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+//                    } else {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+//                    }
+                }
+            })
+
+
+/*        binding.etEmail.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                binding.svRoot.smoothScrollTo(0, binding.etEmail.bottom)
+                binding.svRoot.post(Runnable { binding.etEmail.requestFocus() }
+                )
+                return false
+            }
+        })
+
+        binding.etGstNo.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                binding.svRoot.smoothScrollTo(0, binding.etGstNo.top)
+                binding.svRoot.post(Runnable { binding.etGstNo.requestFocus() }
+                )
+                return false
+            }
+        })*/
+    }
+
+    private fun adjustResizeProgramatically() {
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 }

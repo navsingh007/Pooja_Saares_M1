@@ -1,7 +1,7 @@
 package com.seasia.poojasarees.views.auth
 
 import android.content.Intent
-import android.content.res.Configuration
+import android.view.View
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +15,9 @@ import com.seasia.poojasarees.utils.LocaleManager
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.viewmodel.auth.LoginVM
 import com.seasia.poojasarees.views.home.HomeActivity
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
+
 
 class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -43,6 +46,10 @@ class LoginActivity : BaseActivity() {
         showApiMsgObserver()
         showUserWarningObserver()
         getExtras()
+
+//        focusOnView()
+
+        moveViewToCenterOnKeyboardOpen()
     }
 
     private fun getExtras() {
@@ -267,7 +274,7 @@ class LoginActivity : BaseActivity() {
 
         binding.etMobileNo.setText("")
         binding.etPassword.setText("")
-        binding.etMobileNo.requestFocus()
+//        binding.etMobileNo.requestFocus()
     }
 
     override fun onResume() {
@@ -276,5 +283,48 @@ class LoginActivity : BaseActivity() {
 
         binding.rlRoot.isFocusable = true
         binding.rlRoot.isFocusableInTouchMode = true
+    }
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+//                    if (isOpen) {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+//                    } else {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+//                    }
+                }
+            })
+
+
+//        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+
+/*        binding.etMobileNo.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                binding.svRoot.smoothScrollTo(100, binding.etMobileNo.bottom)
+                binding.svRoot.post(Runnable { binding.etMobileNo.requestFocus() }
+                )
+                return false
+            }
+        })
+
+        binding.etPassword.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                binding.svRoot.smoothScrollTo(200, binding.etPassword.bottom)
+
+
+                binding.svRoot.post(Runnable { binding.etPassword.requestFocus() }
+                )
+                return false
+            }
+        })*/
+    }
+
+    private fun focusOnView() {
+        binding.svRoot.post(Runnable { binding.svRoot.scrollTo(0, binding.etMobileNo.top) })
+        binding.svRoot.post(Runnable { binding.svRoot.scrollTo(0, binding.etPassword.top) })
     }
 }
