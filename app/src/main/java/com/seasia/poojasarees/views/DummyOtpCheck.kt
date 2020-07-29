@@ -1,120 +1,173 @@
 package com.seasia.poojasarees.views
 
 import android.content.Intent
+import android.location.Location
 import android.text.Editable
-import android.text.SpannableStringBuilder
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
-import android.view.WindowManager
+import android.widget.ArrayAdapter
+import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.seasia.poojasarees.R
 import com.seasia.poojasarees.application.MyApplication
+import com.seasia.poojasarees.common.FusedLocationClass
 import com.seasia.poojasarees.common.UtilsFunctions
 import com.seasia.poojasarees.core.BaseActivity
-import com.seasia.poojasarees.databinding.ActivityOtpVerificationBinding
-import com.seasia.poojasarees.viewmodel.auth.OtpVM
-import com.seasia.poojasarees.viewmodel.auth.OtpVM.Companion.MIN_OTP
-import com.seasia.poojasarees.views.auth.ChangePasswordActivity
+import com.seasia.poojasarees.databinding.DummyLayoutBinding
+import com.seasia.poojasarees.helperlocalize.SignupHelper
+import com.seasia.poojasarees.model.helper.Signup
+import com.seasia.poojasarees.model.response.AllTownsOut
+import com.seasia.poojasarees.utils.DialogClass
+import com.seasia.poojasarees.utils.PreferenceKeys
+import com.seasia.poojasarees.viewmodel.auth.SignupVM
+import com.seasia.poojasarees.views.auth.SignupOtpVerifyActivity
+import com.tiper.MaterialSpinner
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 
-class DummyOtpCheck : BaseActivity() {
-    private lateinit var binding: ActivityOtpVerificationBinding
-    private lateinit var otpVM: OtpVM
-    private lateinit var mobileNo: String
+class DummyOtpCheck : BaseActivity(), FusedLocationClass.FusedLocationInterface {
+    private lateinit var binding: DummyLayoutBinding
+    private lateinit var signupVM: SignupVM
+    private var townAdapter: ArrayAdapter<String>? = null
+    private var townList: ArrayList<String> = ArrayList()
+    private var allTownsWithIdList: ArrayList<AllTownsOut> = ArrayList()
+    private var signup: Signup? = null
+
+    // Auto city enter
+    private var fusedLocationClass: FusedLocationClass? = null
+    private var city = ""
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_otp_verification
+        return R.layout.dummy_layout
     }
 
     override fun initViews() {
-        binding = viewDataBinding as ActivityOtpVerificationBinding
-        otpVM = ViewModelProvider(this).get(OtpVM::class.java)
-        binding.otpVerify = otpVM
+        binding = viewDataBinding as DummyLayoutBinding
 
-//        sendOtpResponseObserver()
-//        verifyOtpResponseObserver()
+        signupVM = ViewModelProvider(this).get(SignupVM::class.java)
 
-//        getExtras()
-//        otpVM.sendOtpAtMobile(mobileNo)
+//        signupVM = SignupVM(this)
+        binding.signupVM = signupVM
+        signup = Signup()
+        binding.signup = signup
 
+        signUpResponseObserver()
+        loadingObserver()
+        languageChange()
         setToolbar()
-
-        getWindow().setSoftInputMode(
-            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        )
-//        loadingObserver()
-//        showApiMsgObserver()
-//        showUserWarningObserver()
-
-/*        pinviewTextwatcher()
-
-        binding.btnSubmit.setOnClickListener {
-            val a = binding.et1.text.toString()
-            val b = binding.et2.text.toString()
-            val c = binding.et3.text.toString()
-            val d = binding.et4.text.toString()
-
-            val otp = "$a$b$c$d"
-            UtilsFunctions.showToastSuccess(otp)
-        }*/
+        isAlreadyRegisteredPhoneObserver()
+        signupClickObserver()
+        checkPhoneNo()
+        setInputValidation()
+        showApiMsgObserver()
+        showUserWarningObserver()
+        allTownObserver()
+//        initLocationUpdates()
+        setTownsAdapter()
+        hideKeyboardOnSpinnerClick()
+//        moveViewToCenterOnKeyboardOpen()
     }
 
-    fun resendOtp(v: View) {
-        if (UtilsFunctions.isNetworkConnected()) {
-            otpVM.sendOtpAtMobile(mobileNo)
+    private fun setTownsAdapter() {
+        townAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.row_spinner,
+            townList
+        )
+        binding.spnTown.adapter = townAdapter
+        binding.spnTown.onItemSelectedListener = spinnerItemSelection
+    }
+
+    val spinnerItemSelection = object : MaterialSpinner.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: MaterialSpinner,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            when (parent.id) {
+                binding.spnTown.id -> {
+                    val selectedCity = townAdapter?.getItem(position) ?: ""
+
+                    var townId = ""
+                    for (townWithId in allTownsWithIdList) {
+                        if (selectedCity.equals(townWithId.value)) {
+                            townId = townWithId.option_id ?: ""
+                        }
+                    }
+                    signup?.town = townId
+                }
+            }
         }
+
+        override fun onNothingSelected(parent: MaterialSpinner) {}
+    }
+
+/*    override fun onResume() {
+        super.onResume()
+
+        // Check location permission and enable GPS
+        if (checkAndRequestPermissionLocation()) {
+            if (UtilsFunctions.checkGpsEnabled(this)) {
+            }
+        }
+    }*/
+
+    private fun setInputValidation() {
+//        binding.etName.filters = arrayOf<InputFilter>(UtilsFunctions.filterCharactersForName())
+    }
+
+    private fun checkPhoneNo() {
+        binding.etMobileNo.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (text.toString().length == 10) {
+                    // Check if already registered
+                    signupVM.phoneNoCheck(text.toString())
+                }
+            }
+        })
     }
 
     private fun setToolbar() {
-        binding.rlToolbar.tvCommonHeading.setText(resources.getString(R.string.verification_code))
+        binding.rlToolbar.tvCommonHeading.setText(resources.getString(R.string.register_heading))
     }
 
-    private fun getExtras() {
-        mobileNo = intent.getStringExtra("mobile")
-
-        // Bold mobile no. in description
-        val description = binding.tvOtpSent.text.toString()
-        val otpAtMobile = SpannableStringBuilder()
-            .append(description)
-            .append(" xxxxxxx${mobileNo.substring(7)}")
-//            .bold { append(" xxxxxx${mobileNo.substring(5)}") }
-
-        binding.tvOtpSent.text = otpAtMobile
-    }
-
-    private fun sendOtpResponseObserver() {
-        otpVM.sendOtpResponse().observe(this, Observer {
+    private fun signUpResponseObserver() {
+        signupVM.signupResponse().observe(this, Observer {
             stopProgressDialog()
 
             if (it != null) {
-//                UtilsFunctions.showToastSuccess(it.message!!)
-                UtilsFunctions.showToastSuccess(MyApplication.instance.resources.getString(R.string.otp_sent))
-            }
-        })
-    }
+//                finish()
+//                UtilsFunctions.showToastSuccess("Signed up successfully $it")
 
-    private fun verifyOtpResponseObserver() {
-        otpVM.verifyOtpResponse().observe(this, Observer {
-            stopProgressDialog()
-
-            if (it != null) {
-                UtilsFunctions.showToastSuccess(MyApplication.instance.resources.getString(R.string.otp_verified))
-//                UtilsFunctions.showToastSuccess(it.message!!)
-
-                startActivity(
-                    Intent(this, ChangePasswordActivity::class.java).putExtra(
-                        "mobile",
-                        mobileNo
-                    )
+                val dialog = DialogClass().setConfirmationDialog(
+                    this,
+                    "SignedUp",
+                    R.layout.dialog_thanks_for_signup
                 )
-                finish()
+
+                val btnOk = dialog.findViewById<Button>(R.id.btnOK)
+                btnOk.setOnClickListener { finish() }
+                dialog.show()
             }
         })
+    }
+
+    private fun languageChange() {
+        binding.tvViewInHindi.setOnClickListener {
+
+        }
     }
 
     private fun loadingObserver() {
-        otpVM.isLoading().observe(this, Observer { loading ->
+        signupVM.isLoading().observe(this, Observer { loading ->
             if (loading) {
                 startProgressDialog()
             } else {
@@ -123,27 +176,53 @@ class DummyOtpCheck : BaseActivity() {
         })
     }
 
+    private fun isAlreadyRegisteredPhoneObserver() {
+        signupVM.isValidPhone().observe(this, Observer { isAlreadyRegisteredPhone ->
+            stopProgressDialog()
+
+            if (isAlreadyRegisteredPhone != null) {
+//                UtilsFunctions.showToastSuccess(isAlreadyRegisteredPhone.message ?: "")
+            } else {
+                binding.etMobileNo.setText("")
+                binding.etMobileNo.requestFocus()
+            }
+        })
+    }
+
+    private fun signupClickObserver() {
+        signupVM.onSignupClick().observe(this, Observer {
+            stopProgressDialog()
+
+            if (it != null) {
+//                UtilsFunctions.showToastSuccess("Verify your OTP now")
+
+                var mobile = ""
+                for (customAttribute in it.customer.custom_attributes) {
+                    if (customAttribute.attribute_code.equals("phone_number")) {
+                        mobile = customAttribute.value
+                    }
+                }
+                startActivity(
+                    Intent(this, SignupOtpVerifyActivity::class.java).putExtra(
+                        "mobile",
+                        mobile
+                    )
+                        .putExtra("customerObj", it)
+                )
+            }
+        })
+    }
+
+
     private fun showApiMsgObserver() {
-        otpVM.showApiMsg().observe(this, Observer { msg ->
+        signupVM.showApiMsg().observe(this, Observer { msg ->
             stopProgressDialog()
 
             if (msg != null) {
-                if (msg.equals("Invalid OTP")) {
+                if (msg.equals("User with this phone already exist.")) {
                     UtilsFunctions.showToastError(
                         resources.getString(
-                            R.string.otp_invalid
-                        )
-                    )
-                } else if (msg.equals("OTP sent successfully")) {
-                    UtilsFunctions.showToastError(
-                        resources.getString(
-                            R.string.otp_sent
-                        )
-                    )
-                } else if (msg.equals("OTP verified successfully")) {
-                    UtilsFunctions.showToastError(
-                        resources.getString(
-                            R.string.otp_verified
+                            R.string.register_phone_already_exist
                         )
                     )
                 } else {
@@ -154,70 +233,107 @@ class DummyOtpCheck : BaseActivity() {
     }
 
     private fun showUserWarningObserver() {
-        otpVM.showUserWarning().observe(this, Observer { msg ->
+        signupVM.showUserWarning().observe(this, Observer { msg ->
             if (msg != null) {
-                when (msg) {
-                    MIN_OTP -> {
-                        UtilsFunctions.showToastWarning(resources.getString(R.string.otp_hint))
+                SignupHelper.setUserMsg(this, msg)
+            }
+        })
+    }
+
+    private fun allTownObserver() {
+        signupVM.allTowns().observe(this, Observer { allTowns ->
+            if (allTowns != null) {
+                if (allTowns.size > 0) {
+                    MyApplication.sharedPref.save(PreferenceKeys.ALL_TOWNS, allTowns)
+
+                    // Town with ID list
+                    allTownsWithIdList.clear()
+                    allTownsWithIdList.addAll(allTowns)
+
+                    val towns = ArrayList<String>()
+                    for (town in allTowns) {
+                        towns.add(town.value ?: "")
                     }
+
+                    // Clear all previous data and add new
+                    townList.clear()
+                    townList.addAll(towns)
+                    townAdapter?.notifyDataSetChanged()
                 }
             }
         })
     }
 
-/*    private fun pinviewTextwatcher() {
-        binding.et1.addTextChangedListener(GenericTextWatcher(binding.et1, binding))
-    }*/
-
-/*    private class GenericTextWatcher constructor(private val view: View, val binding: ActivityOtpVerificationBinding) :
-        TextWatcher {
-        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-        override fun afterTextChanged(editable: Editable) {
-            val text = editable.toString()
-            when (view.id) {
-                R.id.et1 -> {
-                    if (text.length == 1)
-                        binding.et2.requestFocus()
-                }
-                R.id.et2 -> {
-                    if (text.length == 1)
-                        binding.et3.requestFocus()
-                    else if (text.length == 0)
-                        binding.et1.requestFocus()
-                }
-                R.id.et3 -> {
-                    if (text.length == 1)
-                        binding.et4.requestFocus()
-                    else if (text.length == 0)
-                        binding.et2.requestFocus()
-                }
-                R.id.et4 -> {
-                    if(text.length==0)
-                        binding.et3.requestFocus()
-                }
-                R.id.et5 -> {
-
-                }
-                R.id.et6 -> {
-
+    private fun hideKeyboardOnSpinnerClick() {
+        binding.spnTown.setOnFocusChangeListener(object : View.OnFocusChangeListener {
+            override fun onFocusChange(p0: View?, isFocused: Boolean) {
+                if (isFocused) {
+                    hideKeyboard(this@DummyOtpCheck)
                 }
             }
+        })
+    }
+
+
+    /**
+     *  Get location
+     */
+    private fun initLocationUpdates() {
+        fusedLocationClass = FusedLocationClass(this, this)
+//        fusedLocationClass = fusedLocation
+        val lastLoc = fusedLocationClass?.getLastLocation(this)
+
+        if (lastLoc != null) {
+            setCityAndStopLocUpdates(lastLoc.latitude, lastLoc.longitude)
         }
+    }
 
-    }*/
+    override fun onLocationChanged(location: Location) {
+        val lat = location.latitude
+        val lon = location.longitude
 
-/*    val textWatcher = object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            val text = editable.toString()
+//        UtilsFunctions.showToastSuccess("latlon - > $lat $lon")
 
-            binding.et1.id
+        setCityAndStopLocUpdates(lat, lon)
+    }
+
+    private fun setCityAndStopLocUpdates(lat: Double, lon: Double) {
+        if (lat != 0.0 && lon != 0.0) {
+            city = UtilsFunctions.getCityFromGeocode(this, lat, lon)
+
+            if (!city.isEmpty()) {
+                binding.etTown.setText(city)
+                stopTracking()
+            }
         }
+    }
 
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun onDestroy() {
+        super.onDestroy()
 
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-    }*/
+        stopTracking()
+        fusedLocationClass = null
+    }
+
+    private fun stopTracking() {
+        if (fusedLocationClass != null) {
+            fusedLocationClass?.stopLocationUpdates()
+        }
+    }
+
+
+    private fun moveViewToCenterOnKeyboardOpen() {
+        KeyboardVisibilityEvent.setEventListener(
+            this,
+            object : KeyboardVisibilityEventListener {
+                override fun onVisibilityChanged(isOpen: Boolean) {
+                    // write your code
+//                    if (isOpen) {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_DOWN) })
+//                    } else {
+//                        binding.svRoot.post(Runnable { binding.svRoot.fullScroll(View.FOCUS_UP) })
+//                    }
+                }
+            })
+    }
 }

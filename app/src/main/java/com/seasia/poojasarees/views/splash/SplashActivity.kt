@@ -1,6 +1,7 @@
 package com.seasia.poojasarees.views.splash
 
 import android.content.Intent
+import android.os.Build
 import android.text.TextUtils
 import android.util.Log
 import androidx.databinding.DataBindingUtil
@@ -9,6 +10,7 @@ import com.seasia.poojasarees.application.MyApplication
 import com.seasia.poojasarees.core.BaseActivity
 import com.seasia.poojasarees.databinding.ActivitySplashBinding
 import com.seasia.poojasarees.fcm.FcmUtils
+import com.seasia.poojasarees.utils.LocaleManager
 import com.seasia.poojasarees.utils.PreferenceKeys
 import com.seasia.poojasarees.views.auth.LoginActivity
 import com.seasia.poojasarees.views.home.HomeActivity
@@ -34,6 +36,23 @@ class SplashActivity : BaseActivity() {
                 }
             }
         }, 3000)
+
+        // Locale set on activity launch(workaround) - Below API 24
+        // Need - Not launching LoginActivity in selected language
+        setLocaleOnActivityLaunch()
+    }
+
+    private fun setLocaleOnActivityLaunch() {
+        if (Build.VERSION.SDK_INT < 24) {
+            when (LocaleManager.getLanguagePref(this)) {
+                LocaleManager.HINDI -> {
+                    LocaleManager.setNewLocale(this, LocaleManager.HINDI)
+                }
+                LocaleManager.ENGLISH -> {
+                    LocaleManager.setNewLocale(this, LocaleManager.ENGLISH)
+                }
+            }
+        }
     }
 
     private fun checkScreenType() {

@@ -67,14 +67,22 @@ public class LocaleManager {
      * update resource
      */
     private static Context updateResources(Context context, String language) {
-        Locale locale = new Locale(language);
+        Locale locale;
+        if (Build.VERSION.SDK_INT >= 24) {
+            locale = new Locale(language);
+        } else {
+            // For hindi language support to devices less than API 24
+            locale = new Locale(language, "IN");
+        }
         Locale.setDefault(locale);
         Resources res = context.getResources();
         Configuration config = new Configuration(res.getConfiguration());
-        if (Build.VERSION.SDK_INT >= 17) {
+//        if (Build.VERSION.SDK_INT >= 17) {
+        if (Build.VERSION.SDK_INT >= 24) {
             config.setLocale(locale);
             context = context.createConfigurationContext(config);
         } else {
+            // For hindi language support to devices less than API 24
             config.locale = locale;
             res.updateConfiguration(config, res.getDisplayMetrics());
         }

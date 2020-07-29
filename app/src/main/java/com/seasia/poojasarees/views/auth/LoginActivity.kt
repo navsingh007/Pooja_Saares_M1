@@ -1,6 +1,7 @@
 package com.seasia.poojasarees.views.auth
 
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -35,7 +36,8 @@ class LoginActivity : BaseActivity() {
         loginVM = ViewModelProvider(this).get(LoginVM::class.java)
 
 //        val intanceId = FcmUtils.getInstanceId()
-        val instanceId = MyApplication.sharedPref.getString(PreferenceKeys.FCM_DEVICE_TOKEN, "") ?: ""
+        val instanceId =
+            MyApplication.sharedPref.getString(PreferenceKeys.FCM_DEVICE_TOKEN, "") ?: ""
         Log.d("Login", "ID - $instanceId")
 
 //        loginVM = LoginVM(this)
